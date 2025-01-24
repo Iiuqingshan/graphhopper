@@ -159,7 +159,7 @@ public class PathMerger {
         }
 
         // make sure the way point indices actually point to the points in waypoints...
-        if (allFound && !waypoints.isEmpty()) { // we use empty waypoints for map-matching...
+        if (allFound && !waypoints.isEmpty()) {
             for (int i = 0; i < wayPointIndices.size(); i++) {
                 int index = wayPointIndices.get(i);
                 if (waypoints.getLat(i) != fullPoints.getLat(index) || waypoints.getLon(i) != fullPoints.getLon(index))

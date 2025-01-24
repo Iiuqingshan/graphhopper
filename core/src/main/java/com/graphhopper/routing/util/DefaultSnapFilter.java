@@ -36,7 +36,9 @@ public class DefaultSnapFilter implements EdgeFilter {
 
     @Override
     public boolean accept(EdgeIteratorState edgeState) {
-        return !edgeState.get(inSubnetworkEnc) && (Double.isFinite(weighting.calcEdgeWeight(edgeState, false)) ||
-                Double.isFinite(weighting.calcEdgeWeight(edgeState, true)));
+//        return !edgeState.get(inSubnetworkEnc) && (Double.isFinite(weighting.calcEdgeWeight(edgeState, false)) ||
+//                Double.isFinite(weighting.calcEdgeWeight(edgeState, true)));
+        return Double.isFinite(weighting.calcEdgeWeight(edgeState, false)) ||
+                Double.isFinite(weighting.calcEdgeWeight(edgeState, true));
     }
 }

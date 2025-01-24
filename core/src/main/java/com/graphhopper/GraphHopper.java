@@ -54,6 +54,7 @@ import com.graphhopper.util.*;
 import com.graphhopper.util.Parameters.Landmark;
 import com.graphhopper.util.Parameters.Routing;
 import com.graphhopper.util.details.PathDetailsBuilderFactory;
+import com.graphhopper.util.shapes.GHPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1224,6 +1225,34 @@ public class GraphHopper {
     protected WeightingFactory createWeightingFactory() {
         return new DefaultWeightingFactory(baseGraph.getBaseGraph(), getEncodingManager());
     }
+
+
+    public GHResponse indoorRoute(GHRequest request) {
+        Boolean crossFloor = checkCrossFloor(request);
+        if (crossFloor) {
+            // TODO 跨楼层
+            return null;
+        }
+        return route(request);
+    }
+
+    private Boolean checkCrossFloor(GHRequest request) {
+        List<GHPoint> points = request.getPoints();
+        assert points.size() == 2;
+
+        GHPoint startPoint = points.get(0);
+        GHPoint endPoint = points.get(1);
+
+        String startFloor = startPoint.getLevel();
+        String endFloor = endPoint.getLevel();
+
+        if (startFloor == null || endFloor == null) {
+            return false;
+        }
+
+        return !startFloor.equals(endFloor);
+    }
+
 
     public GHResponse route(GHRequest request) {
         return createRouter().route(request);

@@ -25,6 +25,7 @@ import com.graphhopper.storage.IntsRef;
 import java.util.Map;
 
 /**
+ * 表示一条边，提供了读写边的属性
  * This interface represents an edge and is one possible state of an EdgeIterator.
  * Example:
  * <span>
@@ -266,4 +267,8 @@ public interface EdgeIteratorState {
      * @return the specified edge e
      */
     EdgeIteratorState copyPropertiesFrom(EdgeIteratorState e);
+
+    String getLevel();
+
+    EdgeIteratorState setLevel(String level);
 }

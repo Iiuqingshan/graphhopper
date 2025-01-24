@@ -49,6 +49,7 @@ public class VirtualEdgeIteratorState implements EdgeIteratorState {
     private boolean unfavored;
     private EdgeIteratorState reverseEdge;
     private final boolean reverse;
+    private String level;
 
     public VirtualEdgeIteratorState(int originalEdgeKey, int edgeKey, int baseNode, int adjNode, double distance,
                                     IntsRef edgeFlags, Map<String, KVStorage.KValue> keyValues, PointList pointList, boolean reverse) {
@@ -361,6 +362,7 @@ public class VirtualEdgeIteratorState implements EdgeIteratorState {
             reverseEdge.setFlags(getFlags());
             reverseEdge.setKeyValues(getKeyValues());
             reverseEdge.setDistance(getDistance());
+            reverseEdge.setLevel(getLevel());
             return reverseEdge;
         } else {
             return this;
@@ -370,6 +372,17 @@ public class VirtualEdgeIteratorState implements EdgeIteratorState {
     @Override
     public EdgeIteratorState copyPropertiesFrom(EdgeIteratorState fromEdge) {
         throw new RuntimeException("Not supported.");
+    }
+
+    @Override
+    public String getLevel() {
+        return level;
+    }
+
+    @Override
+    public EdgeIteratorState setLevel(String level) {
+        this.level = level;
+        return this;
     }
 
     public void setReverseEdge(EdgeIteratorState reverseEdge) {

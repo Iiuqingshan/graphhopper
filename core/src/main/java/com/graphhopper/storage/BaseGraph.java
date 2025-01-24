@@ -650,6 +650,7 @@ public class BaseGraph implements Graph, Closeable {
     protected static class EdgeIteratorImpl extends EdgeIteratorStateImpl implements EdgeExplorer, EdgeIterator {
         final EdgeFilter filter;
         int nextEdgeId;
+        private String level;
 
         public EdgeIteratorImpl(BaseGraph baseGraph, EdgeFilter filter) {
             super(baseGraph);
@@ -695,12 +696,24 @@ public class BaseGraph implements Graph, Closeable {
                 throw new IllegalStateException("call next before detaching (edgeId:" + edgeId + " vs. next " + nextEdgeId + ")");
             return super.detach(reverseArg);
         }
+
+        @Override
+        public String getLevel() {
+            return level;
+        }
+
+        @Override
+        public EdgeIteratorState setLevel(String level) {
+            this.level = level;
+            return this;
+        }
     }
 
     /**
      * Include all edges of this storage in the iterator.
      */
     protected static class AllEdgeIterator extends EdgeIteratorStateImpl implements AllEdgesIterator {
+        private String level;
         public AllEdgeIterator(BaseGraph baseGraph) {
             super(baseGraph);
         }
@@ -730,6 +743,7 @@ public class BaseGraph implements Graph, Closeable {
             AllEdgeIterator iter = new AllEdgeIterator(baseGraph);
             iter.edgeId = edgeId;
             iter.edgePointer = edgePointer;
+            iter.level = level;
             if (reverseArg) {
                 iter.reverse = !this.reverse;
                 iter.baseNode = adjNode;
@@ -740,6 +754,16 @@ public class BaseGraph implements Graph, Closeable {
                 iter.adjNode = adjNode;
             }
             return iter;
+        }
+
+        @Override
+        public String getLevel() {
+            return "";
+        }
+
+        @Override
+        public EdgeIteratorState setLevel(String level) {
+            return null;
         }
     }
 
@@ -753,6 +777,7 @@ public class BaseGraph implements Graph, Closeable {
         boolean reverse = false;
         int edgeId = -1;
         private final EdgeIntAccess edgeIntAccess;
+        private String level;
 
         public EdgeIteratorStateImpl(BaseGraph baseGraph) {
             this.baseGraph = baseGraph;
@@ -1001,6 +1026,17 @@ public class BaseGraph implements Graph, Closeable {
         }
 
         @Override
+        public String getLevel() {
+            return level;
+        }
+
+        @Override
+        public EdgeIteratorState setLevel(String level) {
+            this.level = level;
+            return this;
+        }
+
+        @Override
         public EdgeIteratorState setWayGeometry(PointList pillarNodes) {
             baseGraph.setWayGeometry_(pillarNodes, edgePointer, reverse);
             return this;
@@ -1065,6 +1101,7 @@ public class BaseGraph implements Graph, Closeable {
                 // for #162
                 edge.reverse = !reverse;
             }
+            edge.level = level;
             return edge;
         }
 

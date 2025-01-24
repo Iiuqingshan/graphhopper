@@ -1,0 +1,38 @@
+{
+  "priority": [
+    {
+      "if": "true",
+      "multiply_by": 1
+    },
+    {
+      "if": "road_class == PEDESTRIAN",
+      "multiply_by": 1
+    },
+    {
+      "if": "road_class == STEPS",
+      "multiply_by": 0.8
+    },
+    {
+      "if": "road_class == ELEVATOR",
+      "multiply_by": 1.5
+    }
+  ],
+  "speed": [
+    {
+      "if": "true",
+      "limit_to": "foot_average_speed"
+    },
+    {
+      "if": "road_class == PEDESTRIAN",
+      "limit_to": "5"
+    },
+    {
+      "if": "road_class == STEPS",
+      "limit_to": "3"
+    },
+    {
+      "if": "road_class == ELEVATOR",
+      "limit_to": "2"
+    }
+  ]
+}

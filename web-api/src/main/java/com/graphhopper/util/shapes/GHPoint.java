@@ -21,6 +21,7 @@ import com.graphhopper.util.NumHelper;
 import org.locationtech.jts.geom.Point;
 
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * @author Peter Karich
@@ -29,12 +30,20 @@ public class GHPoint {
     public double lat = Double.NaN;
     public double lon = Double.NaN;
 
+    public String level;
+
     public GHPoint() {
     }
 
     public GHPoint(double lat, double lon) {
         this.lat = lat;
         this.lon = lon;
+    }
+
+    public GHPoint(double lat, double lon, String level) {
+        this.lat = lat;
+        this.lon = lon;
+        this.level = level;
     }
 
     public static GHPoint create(Point point) {
@@ -55,17 +64,17 @@ public class GHPoint {
 
     private static GHPoint fromString(String str, boolean lonLatOrder) {
         String[] fromStrs = str.split(",");
-        if (fromStrs.length != 2)
-            throw new IllegalArgumentException("Cannot parse point '" + str + "'");
+        int length = fromStrs.length;
+        if (length < 2)
+            throw new IllegalArgumentException("Cannot parse indoor point '" + str + "'");
 
         try {
             double fromLat = Double.parseDouble(fromStrs[0]);
             double fromLon = Double.parseDouble(fromStrs[1]);
-            if (lonLatOrder) {
-                return new GHPoint(fromLon, fromLat);
-            } else {
+            if (length == 2) {
                 return new GHPoint(fromLat, fromLon);
             }
+            return new GHPoint(fromLat, fromLon, fromStrs[2]);
         } catch (NumberFormatException ex) {
             throw new IllegalArgumentException("Cannot parse point '" + str + "'");
         }
@@ -77,6 +86,14 @@ public class GHPoint {
 
     public double getLat() {
         return lat;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
     }
 
     public boolean isValid() {

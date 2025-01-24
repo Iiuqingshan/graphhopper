@@ -102,6 +102,7 @@ class PtGraphAsAdjacencyList implements Graph {
         private class StationGraphEdgeIterator implements EdgeIterator {
             private final Iterator<PtGraph.PtEdge> iterator;
             private PtGraph.PtEdge currentElement;
+            private String level;
 
             public StationGraphEdgeIterator(Iterator<PtGraph.PtEdge> iterator) {
                 this.iterator = iterator;
@@ -326,6 +327,17 @@ class PtGraphAsAdjacencyList implements Graph {
             @Override
             public EdgeIteratorState copyPropertiesFrom(EdgeIteratorState e) {
                 throw new RuntimeException();
+            }
+
+            @Override
+            public String getLevel() {
+                return level;
+            }
+
+            @Override
+            public EdgeIteratorState setLevel(String level) {
+                this.level = level;
+                return this;
             }
         }
     }

@@ -19,6 +19,7 @@ package com.graphhopper.reader.osm;
 
 import com.carrotsearch.hppc.BitSet;
 import com.carrotsearch.hppc.LongArrayList;
+import com.graphhopper.apache.commons.lang3.StringUtils;
 import com.graphhopper.coll.GHLongLongHashMap;
 import com.graphhopper.reader.ReaderElement;
 import com.graphhopper.reader.ReaderNode;
@@ -40,10 +41,7 @@ import com.graphhopper.routing.util.countryrules.CountryRule;
 import com.graphhopper.routing.util.countryrules.CountryRuleFactory;
 import com.graphhopper.routing.util.parsers.RestrictionSetter;
 import com.graphhopper.search.KVStorage;
-import com.graphhopper.storage.BaseGraph;
-import com.graphhopper.storage.IntsRef;
-import com.graphhopper.storage.NodeAccess;
-import com.graphhopper.storage.TurnCostStorage;
+import com.graphhopper.storage.*;
 import com.graphhopper.util.*;
 import com.graphhopper.util.shapes.GHPoint;
 import com.graphhopper.util.shapes.GHPoint3D;
@@ -380,6 +378,11 @@ public class OSMReader {
         if (!map.isEmpty())
             edge.setKeyValues(map);
 
+        String level = way.getTag("level");
+        if (level != null) {
+            edge.setLevel(level);
+        }
+
         // If the entire way is just the first and last point, do not waste space storing an empty way geometry
         if (pointList.size() > 2) {
             // the geometry consists only of pillar nodes, but we check that the first and last points of the pointList
@@ -484,7 +487,10 @@ public class OSMReader {
                 }
             }
 
-        way.setTag("key_values", map);
+        String level = way.getTag("level");
+        if (level != null) {
+            way.setTag("level", level);
+        }
 
         if (!isCalculateWayDistance(way))
             return;
