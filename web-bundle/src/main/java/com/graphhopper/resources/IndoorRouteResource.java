@@ -85,7 +85,7 @@ public class IndoorRouteResource {
             @QueryParam("points_encoded") @DefaultValue("false") boolean pointsEncoded,
             @QueryParam("points_encoded_multiplier") @DefaultValue("1e5") double pointsEncodedMultiplier,
             @QueryParam("profile") @DefaultValue("foot") String profileName,
-            @QueryParam(ALGORITHM) @DefaultValue("") String algoStr,
+            @QueryParam(ALGORITHM) @DefaultValue(Parameters.Algorithms.ALT_ROUTE) String algoStr,
             @QueryParam("locale") @DefaultValue("en") String localeStr,
             @QueryParam(POINT_HINT) List<String> pointHints,
             @QueryParam(CURBSIDE) List<String> curbsides,
@@ -159,15 +159,10 @@ public class IndoorRouteResource {
                     + ", time0: " + Math.round(ghResponse.getBest().getTime() / 60000f) + "min"
                     + ", points0: " + ghResponse.getBest().getPoints().size()
                     + ", debugInfo: " + ghResponse.getDebugInfo());
-            return writeGPX ?
-                    gpxSuccessResponseBuilder(ghResponse, timeString, trackName, enableElevation, withRoute, withTrack, withWayPoints, Constants.VERSION).
-                            header("X-GH-Took", "" + Math.round(took)).
-                            build()
-                    :
-                    Response.ok(ResponsePathSerializer.jsonObject(ghResponse, new ResponsePathSerializer.Info(config.getCopyrights(), Math.round(took), osmDate), instructions, calcPoints, enableElevation, pointsEncoded, pointsEncodedMultiplier)).
-                            header("X-GH-Took", "" + Math.round(took)).
-                            type(MediaType.APPLICATION_JSON).
-                            build();
+            return Response.ok(ResponsePathSerializer.indoorJsonObject(ghResponse, new ResponsePathSerializer.Info(config.getCopyrights(), Math.round(took), osmDate), instructions, calcPoints, enableElevation, pointsEncoded, pointsEncodedMultiplier)).
+                    header("X-GH-Took", "" + Math.round(took)).
+                    type(MediaType.APPLICATION_JSON).
+                    build();
         }
     }
 

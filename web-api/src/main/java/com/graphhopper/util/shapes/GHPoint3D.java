@@ -65,4 +65,9 @@ public class GHPoint3D extends GHPoint {
     public Double[] toGeoJson() {
         return new Double[]{lon, lat, ele};
     }
+
+    @Override
+    public void setLevel(String level) {
+        super.setLevel(level);
+    }
 }

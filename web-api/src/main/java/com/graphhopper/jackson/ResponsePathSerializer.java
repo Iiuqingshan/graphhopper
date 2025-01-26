@@ -25,6 +25,7 @@ import com.graphhopper.GHResponse;
 import com.graphhopper.ResponsePath;
 import com.graphhopper.util.Helper;
 import com.graphhopper.util.PointList;
+import org.locationtech.jts.geom.LineString;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -107,6 +108,45 @@ public class ResponsePathSerializer {
             if (calcPoints) {
                 jsonPath.putPOJO("bbox", p.calcBBox2D());
                 jsonPath.putPOJO("points", pointsEncoded ? encodePolyline(p.getPoints(), enableElevation, pointsMultiplier) : p.getPoints().toLineString(enableElevation));
+                if (enableInstructions) {
+                    jsonPath.putPOJO("instructions", p.getInstructions());
+                }
+                jsonPath.putPOJO("legs", p.getLegs());
+                jsonPath.putPOJO("details", p.getPathDetails());
+                jsonPath.put("ascend", p.getAscend());
+                jsonPath.put("descend", p.getDescend());
+            }
+            jsonPath.putPOJO("snapped_waypoints", pointsEncoded ? encodePolyline(p.getWaypoints(), enableElevation, pointsMultiplier) : p.getWaypoints().toLineString(enableElevation));
+            if (p.getFare() != null) {
+                jsonPath.put("fare", NumberFormat.getCurrencyInstance(Locale.ROOT).format(p.getFare()));
+            }
+        }
+        return json;
+    }
+
+    public static ObjectNode indoorJsonObject(GHResponse ghRsp, Info info, boolean enableInstructions,
+                                        boolean calcPoints, boolean enableElevation, boolean pointsEncoded, double pointsMultiplier) {
+        ObjectNode json = JsonNodeFactory.instance.objectNode();
+        json.putPOJO("hints", ghRsp.getHints().toMap());
+        json.putPOJO("info", info);
+        ArrayNode jsonPathList = json.putArray("paths");
+        for (ResponsePath p : ghRsp.getAll()) {
+            ObjectNode jsonPath = jsonPathList.addObject();
+            jsonPath.put("distance", Helper.round(p.getDistance(), 3));
+            jsonPath.put("weight", Helper.round6(p.getRouteWeight()));
+            jsonPath.put("time", p.getTime());
+            jsonPath.put("transfers", p.getNumChanges());
+            if (!p.getDescription().isEmpty()) {
+                jsonPath.putPOJO("description", p.getDescription());
+            }
+
+            // for points and snapped_waypoints:
+            jsonPath.put("points_encoded", pointsEncoded);
+            if (pointsEncoded) jsonPath.put("points_encoded_multiplier", pointsMultiplier);
+
+            if (calcPoints) {
+                jsonPath.putPOJO("bbox", p.calcBBox2D());
+                jsonPath.putPOJO("points", pointsEncoded ? encodePolyline(p.getPoints(), enableElevation, pointsMultiplier) : p.getPoints().toIndoorLineString(enableElevation));
                 if (enableInstructions) {
                     jsonPath.putPOJO("instructions", p.getInstructions());
                 }

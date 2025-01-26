@@ -133,6 +133,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
     private double[] latitudes;
     private double[] longitudes;
     private double[] elevations;
+    private String[] levels;
     private boolean isImmutable = false;
     private LineString cachedLineString;
 
@@ -143,6 +144,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
     public PointList(int cap, boolean is3D) {
         latitudes = new double[cap];
         longitudes = new double[cap];
+        levels = new String[cap];
         this.is3D = is3D;
         if (is3D)
             elevations = new double[cap];
@@ -192,6 +194,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
             cap = 15;
         latitudes = Arrays.copyOf(latitudes, cap);
         longitudes = Arrays.copyOf(longitudes, cap);
+        levels = Arrays.copyOf(levels, cap);
         if (is3D)
             elevations = Arrays.copyOf(elevations, cap);
     }
@@ -237,6 +240,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
             int tmp = size + i;
             latitudes[tmp] = points.getLat(i);
             longitudes[tmp] = points.getLon(i);
+            levels[tmp] = points.getLevel(i);
             if (is3D)
                 elevations[tmp] = points.getEle(i);
         }
@@ -273,6 +277,13 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
         return longitudes[index];
     }
 
+    public String getLevel(int index) {
+        if (index >= size)
+            throw new ArrayIndexOutOfBoundsException(ERR_MSG + " index:" + index + ", size:" + size);
+
+        return levels[index];
+    }
+
     @Override
     public double getEle(int index) {
         if (index >= size)
@@ -305,6 +316,10 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
             tmp = longitudes[i];
             longitudes[i] = longitudes[swapIndex];
             longitudes[swapIndex] = tmp;
+
+            String tmpLevel = levels[i];
+            levels[i] = levels[swapIndex];
+            levels[swapIndex] = tmpLevel;
 
             if (is3D) {
                 tmp = elevations[i];
@@ -341,7 +356,8 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
             if (this.is3D()) {
                 sb.append(',');
                 sb.append(this.getEle(i));
-            }
+            };
+            sb.append(this.getLevel(i));
             sb.append(')');
         }
         return sb.toString();
@@ -372,6 +388,26 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
         if (size() == 1)
             coordinates[1] = coordinates[0];
         return factory.createLineString(new PackedCoordinateSequence.Double(coordinates, includeElevation ? 3 : 2));
+    }
+
+    public LineString toIndoorLineString(boolean includeElevation) {
+        IndoorCoordinate[] coordinates = new IndoorCoordinate[size() == 1 ? 2 : size()];
+        for (int i = 0; i < size(); i++) {
+            coordinates[i] = includeElevation ?
+                    new IndoorCoordinate(
+                            round6(this.getLon(i)),
+                            round6(this.getLat(i)),
+                            round2(this.getEle(i))) :
+                    new IndoorCoordinate(
+                            round6(this.getLon(i)),
+                            round6(this.getLat(i)),
+                            this.getLevel(i));
+        }
+
+        // special case as just 1 point is not supported in the specification #1412
+        if (size() == 1)
+            coordinates[1] = coordinates[0];
+        return factory.createLineString(new IndoorPackedCoordinateSequence(coordinates, 3));
     }
 
     public LineString getCachedLineString(boolean includeElevation) {

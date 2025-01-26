@@ -47,6 +47,16 @@ public class Snap {
     private GHPoint3D snappedPoint;
     private Position snappedPosition;
 
+    private String level;
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
     public Snap(double queryLat, double queryLon) {
         queryPoint = new GHPoint(queryLat, queryLon);
     }
