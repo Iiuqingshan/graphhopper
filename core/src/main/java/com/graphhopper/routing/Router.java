@@ -94,6 +94,41 @@ public class Router {
         }
     }
 
+    /**
+     *  jewel 路线
+     * @param request
+     * @return
+     */
+    public GHResponse indoorRoute(GHRequest request) {
+        try {
+            checkNoLegacyParameters(request);
+            checkAtLeastOnePoint(request);
+            checkIfPointsAreInBounds(request.getPoints());
+            checkHeadings(request);
+            checkPointHints(request);
+            checkCurbsides(request);
+            checkNoBlockArea(request);
+            checkCustomModel(request);
+
+            Solver solver = createSolver(request);
+            solver.checkRequest();
+            solver.init();
+
+            // 备用路线 多个可能路径，用户可以选择其中一条路径
+            return routeAlt(request, solver);
+        } catch (MultiplePointsNotFoundException ex) {
+            GHResponse ghRsp = new GHResponse();
+            for (IntCursor p : ex.getPointsNotFound()) {
+                ghRsp.addError(new PointNotFoundException("Cannot find point " + p.value + ": " + request.getPoints().get(p.value), p.value));
+            }
+            return ghRsp;
+        } catch (IllegalArgumentException ex) {
+            GHResponse ghRsp = new GHResponse();
+            ghRsp.addError(ex);
+            return ghRsp;
+        }
+    }
+
     public GHResponse route(GHRequest request) {
         try {
             checkNoLegacyParameters(request);
@@ -112,10 +147,13 @@ public class Router {
             if (ROUND_TRIP.equalsIgnoreCase(request.getAlgorithm())) {
                 if (!(solver instanceof FlexSolver))
                     throw new IllegalArgumentException("algorithm=round_trip only works with a flexible algorithm");
+                // 往返路线 从一个起点出发，经过一系列中间点，然后返回起点
                 return routeRoundTrip(request, (FlexSolver) solver);
             } else if (ALT_ROUTE.equalsIgnoreCase(request.getAlgorithm())) {
+                // 备用路线 多个可能路径，用户可以选择其中一条路径
                 return routeAlt(request, solver);
             } else {
+                // 经过特定点的路线 允许用户指定一系列中间点，路径需要经过这些中间点
                 return routeVia(request, solver);
             }
         } catch (MultiplePointsNotFoundException ex) {

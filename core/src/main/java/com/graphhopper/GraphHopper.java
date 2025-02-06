@@ -1233,7 +1233,7 @@ public class GraphHopper {
             // TODO 跨楼层
             return null;
         }
-        return route(request);
+        return createRouter().indoorRoute(request);
     }
 
     private Boolean checkCrossFloor(GHRequest request) {

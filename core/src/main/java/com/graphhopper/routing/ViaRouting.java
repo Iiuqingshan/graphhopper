@@ -77,6 +77,7 @@ public class ViaRouting {
                 snap = locationIndex.findClosest(point.lat, point.lon, new NameSimilarityEdgeFilter(strictEdgeFilter,
                         pointHints.get(placeIndex), point, 170));
             } else if (!snapPreventions.isEmpty()) {
+                // 获取最近的点(snap)
                 snap = locationIndex.findClosest(point.lat, point.lon, strictEdgeFilter);
             }
 
