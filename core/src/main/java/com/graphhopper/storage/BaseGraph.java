@@ -758,12 +758,13 @@ public class BaseGraph implements Graph, Closeable {
 
         @Override
         public String getLevel() {
-            return "";
+            return level;
         }
 
         @Override
         public EdgeIteratorState setLevel(String level) {
-            return null;
+            this.level = level;
+            return this;
         }
     }
 
