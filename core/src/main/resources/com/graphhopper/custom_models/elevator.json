@@ -1,0 +1,46 @@
+{
+  "priority": [
+    {
+      "if": "true",
+      "multiply_by": "1"
+    },
+    {
+      "if": "!foot_access",
+      "multiply_by": "0"
+    },
+    {
+      "if": "foot_road_access == PRIVATE",
+      "multiply_by": "0"
+    },
+    {
+      "if": "indoor_route_type == ELEVATOR",
+      "multiply_by": "5"
+    },
+    {
+      "if": "indoor_route_type == STAIRS",
+      "multiply_by": "0.2"
+    },
+    {
+      "else": "",
+      "multiply_by": "foot_priority"
+    }
+  ],
+  "speed": [
+    {
+      "if": "true",
+      "limit_to": "foot_average_speed"
+    },
+    {
+      "if": "indoor_route_type == ELEVATOR",
+      "limit_to": "2"
+    },
+    {
+      "if": "indoor_route_type == STAIRS",
+      "limit_to": "foot_average_speed * 0.7"
+    },
+    {
+      "if": "indoor_route_type == ESCALATOR",
+      "limit_to": "foot_average_speed * 1.2"
+    }
+  ]
+}

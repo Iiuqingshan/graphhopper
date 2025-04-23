@@ -22,6 +22,7 @@ import com.graphhopper.GHResponse;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.GraphHopperConfig;
 import com.graphhopper.gpx.GpxConversions;
+import com.graphhopper.http.GHPointIndoorParam;
 import com.graphhopper.http.GHPointParam;
 import com.graphhopper.http.GHRequestTransformer;
 import com.graphhopper.http.ProfileResolver;
@@ -86,14 +87,14 @@ public class RouteResource {
             @Context UriInfo uriInfo,
             @QueryParam(WAY_POINT_MAX_DISTANCE) @DefaultValue("0.5") double minPathPrecision,
             @QueryParam(ELEVATION_WAY_POINT_MAX_DISTANCE) Double minPathElevationPrecision,
-            @QueryParam("point") @NotNull List<GHPointParam> pointParams,
+            @QueryParam("point") @NotNull List<GHPointIndoorParam> pointParams,
             @QueryParam("type") @DefaultValue("json") String type,
             @QueryParam(INSTRUCTIONS) @DefaultValue("true") boolean instructions,
             @QueryParam(CALC_POINTS) @DefaultValue("true") boolean calcPoints,
             @QueryParam("elevation") @DefaultValue("false") boolean enableElevation,
-            @QueryParam("points_encoded") @DefaultValue("true") boolean pointsEncoded,
+            @QueryParam("points_encoded") @DefaultValue("false") boolean pointsEncoded,
             @QueryParam("points_encoded_multiplier") @DefaultValue("1e5") double pointsEncodedMultiplier,
-            @QueryParam("profile") String profileName,
+            @QueryParam("profile") @DefaultValue("fastest") String profileName,
             @QueryParam(ALGORITHM) @DefaultValue("") String algoStr,
             @QueryParam("locale") @DefaultValue("en") String localeStr,
             @QueryParam(POINT_HINT) List<String> pointHints,

@@ -18,6 +18,7 @@
 
 package com.graphhopper.routing.ev;
 
+import com.graphhopper.routing.IndoorRouteTypeParser;
 import com.graphhopper.routing.util.*;
 import com.graphhopper.routing.util.parsers.*;
 import com.graphhopper.util.PMap;
@@ -346,6 +347,11 @@ public class DefaultImportRegistry implements ImportRegistry {
             return ImportUnit.create(name, props -> VehiclePriority.create("mtb", 4, PriorityCode.getFactor(1), false),
                     (lookup, props) -> new MountainBikePriorityParser(lookup),
                     VehicleSpeed.key("mtb"), BikeNetwork.KEY
+            );
+        else if (IndoorRouteType.KEY.equals(name))
+            return ImportUnit.create(name, props -> IndoorRouteType.create(),
+                    (lookup, props) -> new IndoorRouteTypeParser(
+                            lookup.getEnumEncodedValue(IndoorRouteType.KEY, IndoorRouteType.class))
             );
         return null;
     }

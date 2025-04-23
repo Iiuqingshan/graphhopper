@@ -21,6 +21,7 @@ package com.graphhopper.application.cli;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.GraphHopperConfig;
+import com.graphhopper.IndoorGraphHopper;
 import com.graphhopper.ResponsePath;
 import com.graphhopper.application.GraphHopperServerConfiguration;
 import com.graphhopper.gpx.GpxConversions;
@@ -91,7 +92,9 @@ public class MatchCommand extends ConfiguredCommand<GraphHopperServerConfigurati
     protected void run(Bootstrap<GraphHopperServerConfiguration> bootstrap, Namespace args, GraphHopperServerConfiguration configuration) {
         GraphHopperConfig graphHopperConfiguration = configuration.getGraphHopperConfiguration();
 
-        GraphHopper hopper = new GraphHopper().init(graphHopperConfiguration);
+        IndoorGraphHopper hopper = new IndoorGraphHopper();
+        hopper.setEncodedValuesString("indoor_route_type," + hopper.getEncodedValuesString());
+        hopper.init(graphHopperConfiguration);
         hopper.importOrLoad();
 
         PMap hints = new PMap();
