@@ -117,6 +117,9 @@ public class RouteResource {
         GHRequest request = new GHRequest();
         initHints(request.getHints(), uriInfo.getQueryParameters());
 
+        logger.info("==========================");
+        logger.info("qingshan check. profile: {}", profileName);
+
         if (minPathElevationPrecision != null)
             request.getHints().putObject(ELEVATION_WAY_POINT_MAX_DISTANCE, minPathElevationPrecision);
 
@@ -135,7 +138,7 @@ public class RouteResource {
 
         if (uriInfo.getQueryParameters().containsKey(SNAP_PREVENTION)) {
             if (snapPreventions.size() == 1 && snapPreventions.contains(""))
-                request.setSnapPreventions(List.of()); // e.g. "&snap_prevention=&" to force empty list
+                request.setSnapPreventions(List.of());
             else
                 request.setSnapPreventions(snapPreventions);
         } else {
