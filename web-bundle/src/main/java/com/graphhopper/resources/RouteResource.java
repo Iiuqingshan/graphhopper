@@ -117,7 +117,6 @@ public class RouteResource {
         GHRequest request = new GHRequest();
         initHints(request.getHints(), uriInfo.getQueryParameters());
 
-        logger.info("==========================");
         if (minPathElevationPrecision != null)
             request.getHints().putObject(ELEVATION_WAY_POINT_MAX_DISTANCE, minPathElevationPrecision);
 
