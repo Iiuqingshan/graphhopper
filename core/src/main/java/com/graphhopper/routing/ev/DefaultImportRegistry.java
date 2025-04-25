@@ -353,6 +353,11 @@ public class DefaultImportRegistry implements ImportRegistry {
                     (lookup, props) -> new IndoorRouteTypeParser(
                             lookup.getEnumEncodedValue(IndoorRouteType.KEY, IndoorRouteType.class))
             );
+        else if (Level.KEY.equals(name))
+            return ImportUnit.create(name, props -> Level.create(),
+                    (lookup, props) -> new OSMLevelParser(
+                            lookup.getStringEncodedValue(Level.KEY))
+            );
         return null;
     }
 }

@@ -80,6 +80,7 @@ public final class StringEncodedValue extends IntEncodedValueImpl {
         }
         int index = indexMap.getOrDefault(value, 0);
         if (index == 0) {
+            values.forEach(System.out::println);
             if (values.size() == maxValues)
                 throw new IllegalStateException("Maximum number of values reached for " + getName() + ": " + maxValues);
 

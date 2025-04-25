@@ -31,6 +31,7 @@ import com.graphhopper.reader.dem.ElevationProvider;
 import com.graphhopper.routing.OSMReaderConfig;
 import com.graphhopper.routing.ev.Country;
 import com.graphhopper.routing.ev.EdgeIntAccess;
+import com.graphhopper.routing.ev.Level;
 import com.graphhopper.routing.ev.State;
 import com.graphhopper.routing.util.AreaIndex;
 import com.graphhopper.routing.util.CustomArea;

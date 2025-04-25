@@ -2,13 +2,12 @@ package com.graphhopper.routing.util.parsers;
 
 import com.graphhopper.reader.ReaderWay;
 import com.graphhopper.routing.ev.EdgeIntAccess;
-import com.graphhopper.routing.ev.IntEncodedValue;
 import com.graphhopper.routing.ev.StringEncodedValue;
 import com.graphhopper.storage.IntsRef;
 
 public class OSMLevelParser implements TagParser {
 
-    IntEncodedValue levelEnc;
+    StringEncodedValue levelEnc;
 
     public OSMLevelParser(StringEncodedValue levelEnc) {
         this.levelEnc = levelEnc;
@@ -20,6 +19,6 @@ public class OSMLevelParser implements TagParser {
         if (level == null) {
             return;
         }
-        ((StringEncodedValue) levelEnc).setString(false, edgeId, edgeIntAccess, level);
+        levelEnc.setString(false, edgeId, edgeIntAccess, level);
     }
 }

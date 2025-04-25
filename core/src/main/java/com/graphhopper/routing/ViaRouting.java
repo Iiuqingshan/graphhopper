@@ -18,10 +18,7 @@
 package com.graphhopper.routing;
 
 import com.carrotsearch.hppc.IntArrayList;
-import com.graphhopper.routing.ev.EncodedValueLookup;
-import com.graphhopper.routing.ev.EnumEncodedValue;
-import com.graphhopper.routing.ev.RoadClass;
-import com.graphhopper.routing.ev.RoadEnvironment;
+import com.graphhopper.routing.ev.*;
 import com.graphhopper.routing.querygraph.QueryGraph;
 import com.graphhopper.routing.querygraph.VirtualEdgeIteratorState;
 import com.graphhopper.routing.util.*;
@@ -83,7 +80,7 @@ public class ViaRouting {
                 snap = locationIndex.findClosest(point.lat, point.lon, strictEdgeFilter);
             } else {
                 // 默认使用室内边过滤器
-                snap = locationIndex.findClosest(point.lat, point.lon, new IndoorEdgeFilter(level));
+                snap = locationIndex.findClosest(point.lat, point.lon, new IndoorEdgeFilter(lookup, level));
             }
 
             if (snap == null || !snap.isValid())

@@ -1,10 +1,9 @@
 package com.graphhopper;
 
 import com.graphhopper.routing.IndoorRouteTypeParser;
-import com.graphhopper.routing.ev.EnumEncodedValue;
-import com.graphhopper.routing.ev.ImportUnit;
-import com.graphhopper.routing.ev.IndoorRouteType;
+import com.graphhopper.routing.ev.*;
 import com.graphhopper.routing.util.OSMParsers;
+import com.graphhopper.routing.util.parsers.OSMLevelParser;
 import com.graphhopper.util.PMap;
 
 import java.util.List;
@@ -19,6 +18,10 @@ public class GraphHopperIndoor extends GraphHopper {
             EnumEncodedValue<IndoorRouteType> indoorRouteTypeEnc =
                     encodingManager.getEnumEncodedValue(IndoorRouteType.KEY, IndoorRouteType.class);
             parsers.addWayTagParser(new IndoorRouteTypeParser(indoorRouteTypeEnc));
+        }
+        if (encodingManager.hasEncodedValue(Level.KEY)) {
+            StringEncodedValue levelEncodedValue = encodingManager.getStringEncodedValue(Level.KEY);
+            parsers.addWayTagParser(new OSMLevelParser(levelEncodedValue));
         }
 
         return parsers;
