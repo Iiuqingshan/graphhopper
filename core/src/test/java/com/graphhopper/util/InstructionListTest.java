@@ -79,18 +79,18 @@ public class InstructionListTest {
         // | | |  |
         // 6-7-8--*
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 1.2, 1.0);
-        na.setNode(1, 1.2, 1.1);
-        na.setNode(2, 1.2, 1.2);
-        na.setNode(3, 1.1, 1.0);
-        na.setNode(4, 1.1, 1.1);
-        na.setNode(5, 1.1, 1.2);
-        na.setNode(9, 1.1, 1.3);
-        na.setNode(10, 1.1, 1.4);
+        na.setNode(0, 1.2, 1.0, 0);
+        na.setNode(1, 1.2, 1.1, 0);
+        na.setNode(2, 1.2, 1.2, 0);
+        na.setNode(3, 1.1, 1.0, 0);
+        na.setNode(4, 1.1, 1.1, 0);
+        na.setNode(5, 1.1, 1.2, 0);
+        na.setNode(9, 1.1, 1.3, 0);
+        na.setNode(10, 1.1, 1.4, 0);
 
-        na.setNode(6, 1.0, 1.0);
-        na.setNode(7, 1.0, 1.1);
-        na.setNode(8, 1.0, 1.2);
+        na.setNode(6, 1.0, 1.0, 0);
+        na.setNode(7, 1.0, 1.1, 0);
+        na.setNode(8, 1.0, 1.2, 0);
         g.edge(0, 1).setDistance(10000).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("0-1")));
         g.edge(1, 2).setDistance(11000).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("1-2")));
 
@@ -179,10 +179,10 @@ public class InstructionListTest {
         //     /
         //    3
         NodeAccess na = g.getNodeAccess();
-        na.setNode(2, 10.3, 10.15);
-        na.setNode(3, 10.0, 10.08);
-        na.setNode(4, 10.1, 10.10);
-        na.setNode(5, 10.2, 10.13);
+        na.setNode(2, 10.3, 10.15, 0);
+        na.setNode(3, 10.0, 10.08, 0);
+        na.setNode(4, 10.1, 10.10, 0);
+        na.setNode(5, 10.2, 10.13, 0);
         g.edge(3, 4).setDistance(100).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("3-4")));
         g.edge(4, 5).setDistance(100).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("4-5")));
 
@@ -218,10 +218,10 @@ public class InstructionListTest {
         //     /
         //    3
         NodeAccess na = g.getNodeAccess();
-        na.setNode(2, 10.3, 10.15);
-        na.setNode(3, 10.0, 10.05);
-        na.setNode(4, 10.1, 10.10);
-        na.setNode(5, 10.2, 10.15);
+        na.setNode(2, 10.3, 10.15, 0);
+        na.setNode(3, 10.0, 10.05, 0);
+        na.setNode(4, 10.1, 10.10, 0);
+        na.setNode(5, 10.2, 10.15, 0);
         g.edge(3, 4).setDistance(100).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("street")));
         g.edge(4, 5).setDistance(100).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("4-5")));
 
@@ -252,10 +252,10 @@ public class InstructionListTest {
         //     4  1
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 51.734514, 9.225571);
-        na.setNode(2, 51.73458, 9.225442);
-        na.setNode(3, 51.734643, 9.22541);
-        na.setNode(4, 51.734451, 9.225436);
+        na.setNode(1, 51.734514, 9.225571, 0);
+        na.setNode(2, 51.73458, 9.225442, 0);
+        na.setNode(3, 51.734643, 9.22541, 0);
+        na.setNode(4, 51.734451, 9.225436, 0);
         g.edge(1, 2).setDistance(10).set(speedEnc, 60, 60);
         g.edge(2, 3).setDistance(10).set(speedEnc, 60, 60);
         g.edge(2, 4).setDistance(10).set(speedEnc, 60, 60);
@@ -281,10 +281,10 @@ public class InstructionListTest {
         //            4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 48.748493, 9.322455);
-        na.setNode(2, 48.748577, 9.322152);
-        na.setNode(3, 48.748776, 9.321889);
-        na.setNode(4, 48.74847, 9.322299);
+        na.setNode(1, 48.748493, 9.322455, 0);
+        na.setNode(2, 48.748577, 9.322152, 0);
+        na.setNode(3, 48.748776, 9.321889, 0);
+        na.setNode(4, 48.74847, 9.322299, 0);
         g.edge(1, 2).setDistance(10).set(speedEnc, 60, 60);
         g.edge(2, 3).setDistance(10).set(speedEnc, 60, 60);
         g.edge(2, 4).setDistance(10).set(speedEnc, 60, 60);
@@ -314,10 +314,10 @@ public class InstructionListTest {
         //         4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 48.411392, 15.599713);
-        na.setNode(2, 48.411457, 15.600410);
-        na.setNode(3, 48.411610, 15.600409);
-        na.setNode(4, 48.411322, 15.600459);
+        na.setNode(1, 48.411392, 15.599713, 0);
+        na.setNode(2, 48.411457, 15.600410, 0);
+        na.setNode(3, 48.411610, 15.600409, 0);
+        na.setNode(4, 48.411322, 15.600459, 0);
 
         g.edge(1, 2).setDistance(20).set(speedEnc, 18, 18);
         g.edge(2, 3).setDistance(20).set(speedEnc, 18, 18);
@@ -354,10 +354,10 @@ public class InstructionListTest {
         //          4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 48.412169, 15.604888);
-        na.setNode(2, 48.412411, 15.605189);
-        na.setNode(3, 48.412614, 15.604872);
-        na.setNode(4, 48.412148, 15.605543);
+        na.setNode(1, 48.412169, 15.604888, 0);
+        na.setNode(2, 48.412411, 15.605189, 0);
+        na.setNode(3, 48.412614, 15.604872, 0);
+        na.setNode(4, 48.412148, 15.605543, 0);
 
         g.edge(1, 2).setDistance(20).set(speedEnc, 18, 18)
                 .set(rcEV, RoadClass.RESIDENTIAL);
@@ -394,10 +394,10 @@ public class InstructionListTest {
         //           4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 43.72977, 7.417209);
-        na.setNode(2, 43.7297585, 7.4173079);
-        na.setNode(3, 43.729821, 7.41725);
-        na.setNode(4, 43.729476, 7.417633);
+        na.setNode(1, 43.72977, 7.417209, 0);
+        na.setNode(2, 43.7297585, 7.4173079, 0);
+        na.setNode(3, 43.729821, 7.41725, 0);
+        na.setNode(4, 43.729476, 7.417633, 0);
 
         // default is priority=0 so set it to 1
         g.edge(1, 2).setDistance(20).set(speedEnc, 5).
@@ -447,11 +447,11 @@ public class InstructionListTest {
         //          5  4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 55.690951, 12.571127);
-        na.setNode(2, 55.69109, 12.5708);
-        na.setNode(3, 55.691214, 12.57065);
-        na.setNode(4, 55.690849, 12.571004);
-        na.setNode(5, 55.690864, 12.570886);
+        na.setNode(1, 55.690951, 12.571127, 0);
+        na.setNode(2, 55.69109, 12.5708,  0);
+        na.setNode(3, 55.691214, 12.57065, 0);
+        na.setNode(4, 55.690849, 12.571004, 0);
+        na.setNode(5, 55.690864, 12.570886, 0);
 
         g.edge(3, 2).setDistance(10).set(roadsSpeedEnc, 50, 50).set(roadsAccessEnc, true, true);
         g.edge(2, 4).setDistance(10).set(roadsSpeedEnc, 40, 40).set(roadsAccessEnc, true, true);
@@ -472,7 +472,7 @@ public class InstructionListTest {
     @Test
     public void testEmptyList() {
         BaseGraph g = new BaseGraph.Builder(carManager).create();
-        g.getNodeAccess().setNode(1, 0, 0);
+        g.getNodeAccess().setNode(1, 0, 0, 0);
         Weighting weighting = new SpeedWeighting(speedEnc);
         Path p = new Dijkstra(g, weighting, tMode).calcPath(0, 1);
         InstructionList il = InstructionsFromEdges.calcInstructions(p, g, weighting, carManager, usTR);
@@ -488,15 +488,15 @@ public class InstructionListTest {
         //     |
         //     1
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 15.0, 10);
-        na.setNode(2, 15.1, 10);
-        na.setNode(3, 15.1, 9.9);
+        na.setNode(1, 15.0, 10, 0);
+        na.setNode(2, 15.1, 10, 0);
+        na.setNode(3, 15.1, 9.9, 0);
         PointList waypoint = new PointList();
         waypoint.add(15.2, 9.9);
-        na.setNode(4, 15.2, 10);
-        na.setNode(5, 15.2, 10.1);
-        na.setNode(6, 15.1, 10.1);
-        na.setNode(7, 15.1, 9.8);
+        na.setNode(4, 15.2, 10,  0);
+        na.setNode(5, 15.2, 10.1, 0);
+        na.setNode(6, 15.1, 10.1, 0);
+        na.setNode(7, 15.1, 9.8,  0);
 
         g.edge(1, 2).setDistance(10000).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("1-2")));
         g.edge(2, 3).setDistance(10000).set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("2-3")));
@@ -540,10 +540,10 @@ public class InstructionListTest {
         //            4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 43.626246, -79.71522);
-        na.setNode(2, 43.625503, -79.714228);
-        na.setNode(3, 43.626285, -79.714974);
-        na.setNode(4, 43.625129, -79.713692);
+        na.setNode(1, 43.626246, -79.71522, 0);
+        na.setNode(2, 43.625503, -79.714228, 0);
+        na.setNode(3, 43.626285, -79.714974, 0);
+        na.setNode(4, 43.625129, -79.713692, 0);
 
         PointList list = new PointList();
         list.add(43.62549, -79.714292);
@@ -561,7 +561,7 @@ public class InstructionListTest {
         assertEquals(Arrays.asList("continue onto main", "arrive at destination"), tmpList);
 
         // Other roads should not influence instructions. Example: https://www.openstreetmap.org/node/392106581
-        na.setNode(5, 43.625666, -79.714048);
+        na.setNode(5, 43.625666, -79.714048, 0);
         g.edge(2, 5).setDistance(80).set(roadsSpeedEnc, 50, 50).set(lanesEnc, 5);
 
         p = new Dijkstra(g, weighting, tMode).calcPath(1, 4);
@@ -584,10 +584,10 @@ public class InstructionListTest {
         //        1-2-4
 
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 51.42523, 14.222864);
-        na.setNode(2, 51.425256, 14.22325);
-        na.setNode(3, 51.425397, 14.223266);
-        na.setNode(4, 51.425273, 14.223427);
+        na.setNode(1, 51.42523, 14.222864, 0);
+        na.setNode(2, 51.425256, 14.22325, 0);
+        na.setNode(3, 51.425397, 14.223266, 0);
+        na.setNode(4, 51.425273, 14.223427, 0);
 
         g.edge(1, 2).setKeyValues(Map.of(STREET_NAME, new KValue("dresdener"))).
                 setDistance(110).set(roadsSpeedEnc, 50, 50).set(lanesEnc, 2);

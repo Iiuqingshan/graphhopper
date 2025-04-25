@@ -298,16 +298,16 @@ public class DirectedRoutingTest {
     @ArgumentsSource(RepeatedFixtureProvider.class)
     public void issue1971(Fixture f) {
         NodeAccess na = f.graph.getNodeAccess();
-        na.setNode(0, 49.408463, 9.700777);
-        na.setNode(1, 49.404298, 9.701958);
-        na.setNode(2, 49.402072, 9.701939);
-        na.setNode(3, 49.401666, 9.701269);
-        na.setNode(4, 49.408590, 9.705463);
-        na.setNode(5, 49.406499, 9.700350);
-        na.setNode(6, 49.407540, 9.703129);
-        na.setNode(7, 49.403293, 9.704648);
-        na.setNode(8, 49.404845, 9.704984);
-        na.setNode(9, 49.409987, 9.704574);
+        na.setNode(0, 49.408463, 9.700777, 0);
+        na.setNode(1, 49.404298, 9.701958, 0);
+        na.setNode(2, 49.402072, 9.701939, 0);
+        na.setNode(3, 49.401666, 9.701269, 0);
+        na.setNode(4, 49.408590, 9.705463, 0);
+        na.setNode(5, 49.406499, 9.700350, 0);
+        na.setNode(6, 49.407540, 9.703129, 0);
+        na.setNode(7, 49.403293, 9.704648, 0);
+        na.setNode(8, 49.404845, 9.704984, 0);
+        na.setNode(9, 49.409987, 9.704574, 0);
         f.graph.edge(4, 8).setDistance(417.830000).set(f.speedEnc, 65.000000, 0.000000); // edgeId=0
         f.graph.edge(0, 1).setDistance(470.936000).set(f.speedEnc, 30.000000, 75.000000); // edgeId=1
         f.graph.edge(3, 5).setDistance(541.431000).set(f.speedEnc, 60.000000, 0.000000); // edgeId=2

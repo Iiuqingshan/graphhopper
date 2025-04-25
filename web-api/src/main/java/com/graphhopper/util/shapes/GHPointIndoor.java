@@ -12,6 +12,13 @@ public class GHPointIndoor extends GHPoint3D {
         this.level = level;
     }
 
+    public GHPointIndoor(double lat, double lon, int level, double ele) {
+        super(lat, lon, ele);
+        this.lat = lat;
+        this.lon = lon;
+        this.level = level;
+    }
+
     public static GHPointIndoor parse(String str) {
         return parse(str, false);
     }

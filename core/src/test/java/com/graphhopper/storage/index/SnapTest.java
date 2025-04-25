@@ -35,8 +35,8 @@ class SnapTest {
         BaseGraph graph = new BaseGraph.Builder(1).create();
         EdgeIteratorState edge = graph.edge(0, 1);
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 40.000_000, 6.000_000);
-        na.setNode(1, 40.000_000, 6.000_101);
+        na.setNode(0, 40.000_000, 6.000_000, 0);
+        na.setNode(1, 40.000_000, 6.000_101, 0);
         double queryLat = 40.001_000;
         double queryLon = 6.000_1009;
         Snap snap = new Snap(queryLat, queryLon);

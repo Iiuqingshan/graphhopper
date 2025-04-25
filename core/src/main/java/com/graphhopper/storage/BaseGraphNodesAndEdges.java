@@ -40,13 +40,13 @@ class BaseGraphNodesAndEdges implements EdgeIntAccess {
 
     // nodes
     private final DataAccess nodes;
-    private final int N_EDGE_REF, N_LAT, N_LON, N_ELE, N_TC;
+    private final int N_EDGE_REF, N_LAT, N_LON, N_ELE, N_TC, N_LEVEL;
     private int nodeEntryBytes;
     private int nodeCount;
 
     // edges
     private final DataAccess edges;
-    private final int E_NODEA, E_NODEB, E_LINKA, E_LINKB, E_DIST, E_KV, E_FLAGS, E_GEO;
+    private final int E_NODEA, E_NODEB, E_LINKA, E_LINKB, E_DIST, E_KV, E_FLAGS, E_GEO, E_LEVEL;
     private final int bytesForFlags;
     private int edgeEntryBytes;
     private int edgeCount;
@@ -74,7 +74,8 @@ class BaseGraphNodesAndEdges implements EdgeIntAccess {
         N_LON = 8;
         N_ELE = N_LON + (withElevation ? 4 : 0);
         N_TC = N_ELE + (withTurnCosts ? 4 : 0);
-        nodeEntryBytes = N_TC + 4;
+        N_LEVEL = N_TC + 4;
+        nodeEntryBytes = N_LEVEL + 4;
 
         // memory layout for edges
         E_NODEA = 0;
@@ -85,7 +86,8 @@ class BaseGraphNodesAndEdges implements EdgeIntAccess {
         E_KV = 20;
         E_FLAGS = 24;
         E_GEO = E_FLAGS + bytesForFlags;
-        edgeEntryBytes = E_GEO + 5;
+        E_LEVEL = E_GEO + 4;
+        edgeEntryBytes = E_LEVEL + 5;
     }
 
     public void create(long initSize) {
@@ -332,6 +334,10 @@ class BaseGraphNodesAndEdges implements EdgeIntAccess {
         edges.setByte(edgePointer + E_GEO + 4, (byte) (geoRef >> 32));
     }
 
+    public void setLevel(long edgePointer, String level) {
+        edges.setBytes(edgePointer, level.getBytes(), level.getBytes().length);
+    }
+
     public void setKeyValuesRef(long edgePointer, int nameRef) {
         edges.setInt(edgePointer + E_KV, nameRef);
     }
@@ -385,6 +391,10 @@ class BaseGraphNodesAndEdges implements EdgeIntAccess {
         nodes.setInt(elePointer + N_ELE, Helper.eleToUInt(ele));
     }
 
+    public void setLevel(long levelPointer, int level) {
+        nodes.setInt(levelPointer + N_LEVEL, Helper.eleToUInt(level));
+    }
+
     public void setTurnCostRef(long nodePointer, int tcRef) {
         nodes.setInt(nodePointer + N_TC, tcRef);
     }
@@ -403,6 +413,10 @@ class BaseGraphNodesAndEdges implements EdgeIntAccess {
 
     public double getEle(long nodePointer) {
         return Helper.uIntToEle(nodes.getInt(nodePointer + N_ELE));
+    }
+
+    public int getLevel(long nodePointer) {
+        return nodes.getInt(nodePointer + N_LEVEL);
     }
 
     public int getTurnCostRef(long nodePointer) {

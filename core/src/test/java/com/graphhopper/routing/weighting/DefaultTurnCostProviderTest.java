@@ -25,10 +25,10 @@ public class DefaultTurnCostProviderTest {
         DecimalEncodedValue orientationEnc = encodingManager.getDecimalEncodedValue(Orientation.KEY);
         OrientationCalculator calc = new OrientationCalculator(orientationEnc);
         BaseGraph graph = new BaseGraph.Builder(encodingManager).withTurnCosts(true).create();
-        graph.getNodeAccess().setNode(1, 0.030, 0.011);
-        graph.getNodeAccess().setNode(2, 0.020, 0.009);
-        graph.getNodeAccess().setNode(3, 0.010, 0.000);
-        graph.getNodeAccess().setNode(4, 0.000, 0.008);
+        graph.getNodeAccess().setNode(1, 0.030, 0.011, 0);
+        graph.getNodeAccess().setNode(2, 0.020, 0.009, 0);
+        graph.getNodeAccess().setNode(3, 0.010, 0.000, 0);
+        graph.getNodeAccess().setNode(4, 0.000, 0.008, 0);
 
         EdgeIntAccess edgeIntAccess = graph.getEdgeAccess();
         //      1
@@ -68,14 +68,13 @@ public class DefaultTurnCostProviderTest {
         //   0 - 1 - 2
         //        3  6
 
-        turnGraph.getNodeAccess().setNode(0, 51.0362, 13.714);
-        turnGraph.getNodeAccess().setNode(1, 51.0362, 13.720);
-        turnGraph.getNodeAccess().setNode(2, 51.0362, 13.726);
-        turnGraph.getNodeAccess().setNode(3, 51.0358, 13.7205);
-        turnGraph.getNodeAccess().setNode(4, 51.0366, 13.720);
-        turnGraph.getNodeAccess().setNode(5, 51.0366, 13.726);
-        turnGraph.getNodeAccess().setNode(6, 51.0358, 13.726);
-
+        turnGraph.getNodeAccess().setNode(0, 51.0362, 13.714, 0);
+        turnGraph.getNodeAccess().setNode(1, 51.0362, 13.720, 0);
+        turnGraph.getNodeAccess().setNode(2, 51.0362, 13.726, 0);
+        turnGraph.getNodeAccess().setNode(3, 51.0358, 13.7205, 0);
+        turnGraph.getNodeAccess().setNode(4, 51.0366, 13.720, 0);
+        turnGraph.getNodeAccess().setNode(5, 51.0366, 13.726, 0);
+        turnGraph.getNodeAccess().setNode(6, 51.0358, 13.726, 0);
         Profile profile = new Profile("car");
         TurnCostsConfig config = new TurnCostsConfig().
                 setRightTurnCosts(0.5).setSharpRightTurnCosts(1).

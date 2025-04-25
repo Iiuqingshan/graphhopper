@@ -148,7 +148,7 @@ public class PointListTest {
         }
 
         // If you change the original PointList the shallow copy changes as well
-        pl1.set(100, 0, 0, 0);
+        pl1.set(100, 0, 0, 0, 0);
         assertEquals(0, pl2.getLat(0), .01);
 
         // Create a shallow copy of the shallow copy

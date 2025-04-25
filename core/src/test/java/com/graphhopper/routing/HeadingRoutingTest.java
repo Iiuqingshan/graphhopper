@@ -366,15 +366,15 @@ class HeadingRoutingTest {
         // |   |   |
         // 0---7---6
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 0.000, 0.000);
-        na.setNode(1, 0.001, 0.000);
-        na.setNode(2, 0.002, 0.000);
-        na.setNode(3, 0.002, 0.001);
-        na.setNode(4, 0.002, 0.002);
-        na.setNode(5, 0.001, 0.002);
-        na.setNode(6, 0.000, 0.002);
-        na.setNode(7, 0.000, 0.001);
-        na.setNode(8, 0.001, 0.001);
+        na.setNode(0, 0.000, 0.000, 0);
+        na.setNode(1, 0.001, 0.000, 0);
+        na.setNode(2, 0.002, 0.000, 0);
+        na.setNode(3, 0.002, 0.001, 0);
+        na.setNode(4, 0.002, 0.002, 0);
+        na.setNode(5, 0.001, 0.002, 0);
+        na.setNode(6, 0.000, 0.002, 0);
+        na.setNode(7, 0.000, 0.001, 0);
+        na.setNode(8, 0.001, 0.001, 0);
 
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, g.edge(0, 1).setDistance(100));
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, g.edge(1, 2).setDistance(100));
@@ -401,15 +401,15 @@ class HeadingRoutingTest {
         // |    |   |
         // 0----7---6
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 0.000, 0.000);
-        na.setNode(1, 0.001, 0.000);
-        na.setNode(2, 0.002, 0.000);
-        na.setNode(3, 0.002, 0.001);
-        na.setNode(4, 0.002, 0.002);
-        na.setNode(5, 0.001, 0.002);
-        na.setNode(6, 0.000, 0.002);
-        na.setNode(7, 0.000, 0.001);
-        na.setNode(8, 0.001, 0.001);
+        na.setNode(0, 0.000, 0.000, 0);
+        na.setNode(1, 0.001, 0.000, 0);
+        na.setNode(2, 0.002, 0.000, 0);
+        na.setNode(3, 0.002, 0.001, 0);
+        na.setNode(4, 0.002, 0.002, 0);
+        na.setNode(5, 0.001, 0.002, 0);
+        na.setNode(6, 0.000, 0.002, 0);
+        na.setNode(7, 0.000, 0.001, 0);
+        na.setNode(8, 0.001, 0.001, 0);
 
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, g.edge(0, 1).setDistance(100));
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, g.edge(1, 2).setDistance(100));

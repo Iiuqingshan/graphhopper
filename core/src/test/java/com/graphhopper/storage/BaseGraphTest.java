@@ -62,7 +62,7 @@ public class BaseGraphTest extends AbstractGraphStorageTester {
         assertTrue(na.is3D());
         na.setNode(0, 10, 10, 0);
         na.setNode(1, 11, 20, 1);
-        na.setNode(2, 12, 12, 0.4);
+        na.setNode(2, 12, 12, 0.4, 0);
 
         EdgeIteratorState iter2 = graph.edge(0, 1).setDistance(100).set(carAccessEnc, true, true);
         iter2.setWayGeometry(Helper.createPointList3D(1.5, 1, 0, 2, 3, 0));

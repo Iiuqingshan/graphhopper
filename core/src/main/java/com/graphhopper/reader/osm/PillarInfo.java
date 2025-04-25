@@ -28,7 +28,7 @@ import com.graphhopper.util.Helper;
  * @author Peter Karich
  */
 public class PillarInfo {
-    private static final int LAT = 0 * 4, LON = 1 * 4, ELE = 2 * 4;
+    private static final int LAT = 0 * 4, LON = 1 * 4, ELE = 2 * 4, LEVEL = 3 * 4;
     private final boolean enabled3D;
     private final DataAccess da;
     private final int rowSizeInBytes;
@@ -54,11 +54,12 @@ public class PillarInfo {
         da.ensureCapacity(tmp + rowSizeInBytes);
     }
 
-    public void setNode(long nodeId, double lat, double lon, double ele) {
+    public void setNode(long nodeId, double lat, double lon, double ele, int level) {
         ensureNode(nodeId);
         long tmp = nodeId * rowSizeInBytes;
         da.setInt(tmp + LAT, Helper.degreeToInt(lat));
         da.setInt(tmp + LON, Helper.degreeToInt(lon));
+        da.setInt(tmp + LEVEL, level);
 
         if (is3D())
             da.setInt(tmp + ELE, Helper.eleToUInt(ele));
@@ -80,6 +81,11 @@ public class PillarInfo {
 
         int intVal = da.getInt(id * rowSizeInBytes + ELE);
         return Helper.uIntToEle(intVal);
+    }
+
+    public int getLevel(long id) {
+        int intVal = da.getInt(id * rowSizeInBytes + LEVEL);
+        return intVal;
     }
 
     public void clear() {

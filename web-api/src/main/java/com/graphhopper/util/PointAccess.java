@@ -37,8 +37,8 @@ public interface PointAccess {
      */
     void ensureNode(int nodeId);
 
-    default void setNode(int nodeId, double lat, double lon) {
-        setNode(nodeId, lat, lon, Double.NaN);
+    default void setNode(int nodeId, double lat, double lon, int level) {
+        setNode(nodeId, lat, lon, Double.NaN, level);
     }
 
     /**
@@ -47,7 +47,7 @@ public interface PointAccess {
      * <p>
      * This methods sets the latitude, longitude and elevation to the specified value.
      */
-    void setNode(int nodeId, double lat, double lon, double ele);
+    void setNode(int nodeId, double lat, double lon, double ele, int level);
 
     /**
      * @return the latitude at the specified node index
@@ -63,4 +63,9 @@ public interface PointAccess {
      * Returns the elevation of the specified nodeId.
      */
     double getEle(int nodeId);
+
+    /**
+     * Returns the level of the specified nodeId
+     */
+    int getLevel(int nodeId);
 }

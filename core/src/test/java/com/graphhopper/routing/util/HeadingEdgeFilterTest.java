@@ -21,8 +21,8 @@ class HeadingEdgeFilterTest {
         EncodingManager em = EncodingManager.start().add(carAccessEnc).add(carSpeedEnc).build();
         BaseGraph g = new BaseGraph.Builder(em).create();
         EdgeIteratorState edge = g.edge(0, 1);
-        g.getNodeAccess().setNode(0, 55.671044, 12.5771583);
-        g.getNodeAccess().setNode(1, 55.6704136, 12.5784324);
+        g.getNodeAccess().setNode(0, 55.671044, 12.5771583, 0);
+        g.getNodeAccess().setNode(1, 55.6704136, 12.5784324, 0);
         // GHUtility.setSpeed(50, 0, carAccessEnc, carSpeedEnc, edge.getFlags());
         assertEquals(131.2, HeadingEdgeFilter.getHeadingOfGeometryNearPoint(edge, point, 20), .1);
     }

@@ -33,10 +33,11 @@ class GHNodeAccess implements NodeAccess {
     }
 
     @Override
-    public final void setNode(int nodeId, double lat, double lon, double ele) {
+    public final void setNode(int nodeId, double lat, double lon, double ele, int level) {
         store.ensureNodeCapacity(nodeId);
         store.setLat(store.toNodePointer(nodeId), lat);
         store.setLon(store.toNodePointer(nodeId), lon);
+        store.setLevel(store.toNodePointer(nodeId), level);
 
         if (store.withElevation()) {
             // meter precision is sufficient for now
@@ -62,6 +63,11 @@ class GHNodeAccess implements NodeAccess {
         if (!store.withElevation())
             throw new IllegalStateException("elevation is disabled");
         return store.getEle(store.toNodePointer(nodeId));
+    }
+
+    @Override
+    public int getLevel(int nodeId) {
+        return store.getLevel(store.toNodePointer(nodeId));
     }
 
     @Override

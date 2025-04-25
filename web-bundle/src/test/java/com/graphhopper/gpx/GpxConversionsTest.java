@@ -72,13 +72,13 @@ public class GpxConversionsTest {
         //     |
         //     1
         NodeAccess na = g.getNodeAccess();
-        na.setNode(1, 15.0, 10);
-        na.setNode(2, 15.1, 10);
-        na.setNode(3, 15.1, 9.9);
-        na.setNode(4, 15.2, 9.9);
-        na.setNode(5, 15.2, 10);
-        na.setNode(6, 15.1, 10.1);
-        na.setNode(7, 15.1, 9.8);
+        na.setNode(1, 15.0, 10, 0);
+        na.setNode(2, 15.1, 10, 0);
+        na.setNode(3, 15.1, 9.9, 0);
+        na.setNode(4, 15.2, 9.9, 0);
+        na.setNode(5, 15.2, 10, 0);
+        na.setNode(6, 15.1, 10.1, 0);
+        na.setNode(7, 15.1, 9.8, 0);
 
         g.edge(1, 2).set(speedEnc, 63).setDistance(7000).setKeyValues(Map.of(STREET_NAME, new KValue("1-2")));
         g.edge(2, 3).set(speedEnc, 72).setDistance(8000).setKeyValues(Map.of(STREET_NAME, new KValue("2-3")));

@@ -46,12 +46,12 @@ public class PriorityRoutingTest {
         EncodingManager em = EncodingManager.start().add(speedEnc).add(priorityEnc).add(RoadClass.create()).build();
         BaseGraph graph = new BaseGraph.Builder(em).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 48.0, 11.0);
-        na.setNode(1, 48.1, 11.1);
-        na.setNode(2, 48.2, 11.2);
-        na.setNode(3, 48.3, 11.3);
-        na.setNode(4, 48.1, 11.0);
-        na.setNode(5, 48.2, 11.1);
+        na.setNode(0, 48.0, 11.0, 0);
+        na.setNode(1, 48.1, 11.1, 0);
+        na.setNode(2, 48.2, 11.2, 0);
+        na.setNode(3, 48.3, 11.3, 0);
+        na.setNode(4, 48.1, 11.0, 0);
+        na.setNode(5, 48.2, 11.1, 0);
         // 0 - 1 - 2 - 3
         //  \- 4 - 5 -/
         double speed = speedEnc.getNextStorableValue(30);

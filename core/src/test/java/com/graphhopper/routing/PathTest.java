@@ -77,9 +77,9 @@ public class PathTest {
     public void testWayList() {
         BaseGraph g = new BaseGraph.Builder(carManager).create();
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 0.0, 0.1);
-        na.setNode(1, 1.0, 0.1);
-        na.setNode(2, 2.0, 0.1);
+        na.setNode(0, 0.0, 0.1, 0);
+        na.setNode(1, 1.0, 0.1, 0);
+        na.setNode(2, 2.0, 0.1, 0);
 
         EdgeIteratorState edge1 = g.edge(0, 1).setDistance(1000).set(carAvSpeedEnc, 10.0, 10.0);
 
@@ -113,7 +113,7 @@ public class PathTest {
 
         // force minor change for instructions
         edge2.setKeyValues(Map.of(STREET_NAME, new KValue("2")));
-        na.setNode(3, 1.0, 1.0);
+        na.setNode(3, 1.0, 1.0, 0);
         g.edge(1, 3).setDistance(1000).set(carAvSpeedEnc, 10.0, 10.0);
 
         e1 = new SPTEntry(edge2.getEdge(), 2, 1,
@@ -170,12 +170,12 @@ public class PathTest {
     public void testFindInstruction() {
         BaseGraph g = new BaseGraph.Builder(carManager).create();
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 0.0, 0.0);
-        na.setNode(1, 5.0, 0.0);
-        na.setNode(2, 5.0, 0.5);
-        na.setNode(3, 10.0, 0.5);
-        na.setNode(4, 7.5, 0.25);
-        na.setNode(5, 5.0, 1.0);
+        na.setNode(0, 0.0, 0.0, 0);
+        na.setNode(1, 5.0, 0.0, 0);
+        na.setNode(2, 5.0, 0.5, 0);
+        na.setNode(3, 10.0, 0.5, 0);
+        na.setNode(4, 7.5, 0.25, 0);
+        na.setNode(5, 5.0, 1.0, 0);
 
         EdgeIteratorState edge1 = g.edge(0, 1).setDistance(1000).set(carAvSpeedEnc, 50.0, 50.0);
         edge1.setWayGeometry(Helper.createPointList());
@@ -525,18 +525,18 @@ public class PathTest {
         //      10 -9 -3
         //       \    |
         //        --- 6
-        na.setNode(1, 52.514, 13.348);
-        na.setNode(2, 52.514, 13.349);
-        na.setNode(3, 52.5135, 13.35);
-        na.setNode(4, 52.514, 13.351);
-        na.setNode(5, 52.5145, 13.351);
-        na.setNode(6, 52.513, 13.35);
-        na.setNode(7, 52.514, 13.352);
-        na.setNode(8, 52.515, 13.351);
+        na.setNode(1, 52.514, 13.348, 0);
+        na.setNode(2, 52.514, 13.349, 0);
+        na.setNode(3, 52.5135, 13.35, 0);
+        na.setNode(4, 52.514, 13.351, 0);
+        na.setNode(5, 52.5145, 13.351, 0);
+        na.setNode(6, 52.513, 13.35, 0);
+        na.setNode(7, 52.514, 13.352, 0);
+        na.setNode(8, 52.515, 13.351, 0);
 
-        na.setNode(9, 52.5135, 13.349);
-        na.setNode(10, 52.5135, 13.348);
-        na.setNode(11, 52.514, 13.347);
+        na.setNode(9, 52.5135, 13.349, 0);
+        na.setNode(10, 52.5135, 13.348, 0);
+        na.setNode(11, 52.514, 13.347, 0);
 
         graph.edge(2, 1).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("MainStreet 2 1")));
         graph.edge(1, 11).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("MainStreet 1 11")));
@@ -640,10 +640,10 @@ public class PathTest {
         //          2   --  1
         //        /
         //      4
-        na.setNode(1, 48.982618, 13.122021);
-        na.setNode(2, 48.982565, 13.121597);
-        na.setNode(3, 48.982611, 13.121012);
-        na.setNode(4, 48.982336, 13.121002);
+        na.setNode(1, 48.982618, 13.122021, 0);
+        na.setNode(2, 48.982565, 13.121597, 0);
+        na.setNode(3, 48.982611, 13.121012, 0);
+        na.setNode(4, 48.982336, 13.121002, 0);
 
         graph.edge(1, 2).set(carAvSpeedEnc, 60, 60).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Regener Weg")));
         graph.edge(2, 4).set(carAvSpeedEnc, 60, 60).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Regener Weg")));
@@ -670,10 +670,10 @@ public class PathTest {
         //      1 ---- 2 ---- 4
         //              \
         //               3
-        na.setNode(1, 48.909071, 8.647136);
-        na.setNode(2, 48.908962, 8.647978);
-        na.setNode(3, 48.908867, 8.648155);
-        na.setNode(4, 48.908789, 8.649244);
+        na.setNode(1, 48.909071, 8.647136, 0);
+        na.setNode(2, 48.908962, 8.647978, 0);
+        na.setNode(3, 48.908867, 8.648155, 0);
+        na.setNode(4, 48.908789, 8.649244, 0);
 
         EnumEncodedValue<RoadClass> roadClassEnc = carManager.getEnumEncodedValue(RoadClass.KEY, RoadClass.class);
         BooleanEncodedValue roadClassLinkEnc = carManager.getBooleanEncodedValue(RoadClassLink.KEY);
@@ -701,10 +701,10 @@ public class PathTest {
         //   1 ->- 2 ->- 3
         //        /
         //      4
-        na.setNode(1, 48.630647, 9.459041);
-        na.setNode(2, 48.630586, 9.459604);
-        na.setNode(3, 48.630558, 9.459851);
-        na.setNode(4, 48.63054, 9.459406);
+        na.setNode(1, 48.630647, 9.459041, 0);
+        na.setNode(2, 48.630586, 9.459604, 0);
+        na.setNode(3, 48.630558, 9.459851, 0);
+        na.setNode(4, 48.63054, 9.459406, 0);
 
         graph.edge(1, 2).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("A 8")));
         graph.edge(2, 3).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("A 8")));
@@ -730,10 +730,10 @@ public class PathTest {
         //             -- 4
         //          /
         //   1 -- 2 -- 3
-        na.setNode(1, 48.70672, 9.164266);
-        na.setNode(2, 48.706741, 9.163719);
-        na.setNode(3, 48.706805, 9.162995);
-        na.setNode(4, 48.706705, 9.16329);
+        na.setNode(1, 48.70672, 9.164266, 0);
+        na.setNode(2, 48.706741, 9.163719, 0);
+        na.setNode(3, 48.706805, 9.162995, 0);
+        na.setNode(4, 48.706705, 9.16329, 0);
 
         g.edge(1, 2).setDistance(5).set(carAvSpeedEnc, 60, 0).setKeyValues(Map.of(STREET_NAME, new KValue("A 8")));
         g.edge(2, 3).setDistance(5).set(carAvSpeedEnc, 60, 0).setKeyValues(Map.of(STREET_NAME, new KValue("A 8")));
@@ -760,10 +760,10 @@ public class PathTest {
         //   1 ->- 2 ->- 3
         //         |
         //         4
-        na.setNode(1, -33.824245, 151.187866);
-        na.setNode(2, -33.824335, 151.188017);
-        na.setNode(3, -33.824415, 151.188177);
-        na.setNode(4, -33.824437, 151.187925);
+        na.setNode(1, -33.824245, 151.187866, 0);
+        na.setNode(2, -33.824335, 151.188017, 0);
+        na.setNode(3, -33.824415, 151.188177, 0);
+        na.setNode(4, -33.824437, 151.187925, 0);
 
         g.edge(1, 2).setDistance(5).set(carAvSpeedEnc, 60, 0).setKeyValues(Map.of(STREET_NAME, new KValue("Pacific Highway")));
         g.edge(2, 3).setDistance(5).set(carAvSpeedEnc, 60, 0).setKeyValues(Map.of(STREET_NAME, new KValue("Pacific Highway")));
@@ -792,10 +792,10 @@ public class PathTest {
         //      1 ---- 2 ---- 4
         //             |
         //             3
-        na.setNode(1, 51.367544, 14.488209);
-        na.setNode(2, 51.368046, 14.486525);
-        na.setNode(3, 51.36875, 14.487019);
-        na.setNode(4, 51.368428, 14.485173);
+        na.setNode(1, 51.367544, 14.488209, 0);
+        na.setNode(2, 51.368046, 14.486525, 0);
+        na.setNode(3, 51.36875, 14.487019, 0);
+        na.setNode(4, 51.368428, 14.485173, 0);
 
         EnumEncodedValue<RoadClass> roadClassEnc = carManager.getEnumEncodedValue(RoadClass.KEY, RoadClass.class);
         BooleanEncodedValue roadClassLinkEnc = carManager.getBooleanEncodedValue(RoadClassLink.KEY);
@@ -829,10 +829,10 @@ public class PathTest {
         //       3
         //        \
         //     4 - 2   --  1
-        na.setNode(1, 48.982618, 13.122021);
-        na.setNode(2, 48.982565, 13.121597);
-        na.setNode(3, 48.982611, 13.121012);
-        na.setNode(4, 48.982565, 13.121002);
+        na.setNode(1, 48.982618, 13.122021, 0);
+        na.setNode(2, 48.982565, 13.121597, 0);
+        na.setNode(3, 48.982611, 13.121012, 0);
+        na.setNode(4, 48.982565, 13.121002, 0);
 
         g.edge(1, 2).set(carAvSpeedEnc, 60, 60).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Regener Weg")));
         g.edge(2, 4).set(carAvSpeedEnc, 60, 60).setDistance(5);
@@ -859,10 +859,10 @@ public class PathTest {
         //  1 ---2--- 3
         //       \
         //        4
-        na.setNode(1, 48.412094, 15.598816);
-        na.setNode(2, 48.412055, 15.599068);
-        na.setNode(3, 48.412034, 15.599411);
-        na.setNode(4, 48.411927, 15.599197);
+        na.setNode(1, 48.412094, 15.598816, 0);
+        na.setNode(2, 48.412055, 15.599068, 0);
+        na.setNode(3, 48.412034, 15.599411, 0);
+        na.setNode(4, 48.411927, 15.599197, 0);
 
         g.edge(1, 2).set(carAvSpeedEnc, 60, 60).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Stöhrgasse")));
         g.edge(2, 3).set(carAvSpeedEnc, 60, 60).setDistance(5);
@@ -889,13 +889,13 @@ public class PathTest {
         //  4----5----6
         //       |
         //  1----2----3
-        na.setNode(1, 48.402116, 9.994367);
-        na.setNode(2, 48.402198, 9.99507);
-        na.setNode(3, 48.402344, 9.996266);
-        na.setNode(4, 48.402191, 9.994351);
-        na.setNode(5, 48.402298, 9.995053);
-        na.setNode(6, 48.402422, 9.996067);
-        na.setNode(7, 48.402604, 9.994962);
+        na.setNode(1, 48.402116, 9.994367, 0);
+        na.setNode(2, 48.402198, 9.99507, 0);
+        na.setNode(3, 48.402344, 9.996266, 0);
+        na.setNode(4, 48.402191, 9.994351, 0);
+        na.setNode(5, 48.402298, 9.995053, 0);
+        na.setNode(6, 48.402422, 9.996067, 0);
+        na.setNode(7, 48.402604, 9.994962, 0);
 
         g.edge(1, 2).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Olgastraße")));
         g.edge(2, 3).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Olgastraße")));
@@ -925,13 +925,13 @@ public class PathTest {
         //  4----5----6
         //       |
         //  3----2----1
-        na.setNode(1, -33.885758, 151.181472);
-        na.setNode(2, -33.885852, 151.180968);
-        na.setNode(3, -33.885968, 151.180501);
-        na.setNode(4, -33.885883, 151.180442);
-        na.setNode(5, -33.885772, 151.180941);
-        na.setNode(6, -33.885692, 151.181445);
-        na.setNode(7, -33.885692, 151.181445);
+        na.setNode(1, -33.885758, 151.181472, 0);
+        na.setNode(2, -33.885852, 151.180968, 0);
+        na.setNode(3, -33.885968, 151.180501, 0);
+        na.setNode(4, -33.885883, 151.180442, 0);
+        na.setNode(5, -33.885772, 151.180941, 0);
+        na.setNode(6, -33.885692, 151.181445, 0);
+        na.setNode(7, -33.885692, 151.181445, 0);
 
         g.edge(1, 2).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Parramatta Road")));
         g.edge(2, 3).set(carAvSpeedEnc, 60, 0).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("Parramatta Road")));
@@ -993,10 +993,10 @@ public class PathTest {
         //     /
         // 2 - 3 - 4
         //
-        na.setNode(1, 48.76423, 8.679103);
-        na.setNode(2, 48.76417, 8.678647);
-        na.setNode(3, 48.764149, 8.678926);
-        na.setNode(4, 48.764085, 8.679183);
+        na.setNode(1, 48.76423, 8.679103, 0);
+        na.setNode(2, 48.76417, 8.678647, 0);
+        na.setNode(3, 48.764149, 8.678926, 0);
+        na.setNode(4, 48.764085, 8.679183, 0);
 
         g.edge(1, 3).setDistance(5).set(carAvSpeedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("Talstraße, new KValue( K 4313")));
         g.edge(2, 3).setDistance(5).set(carAvSpeedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("Calmbacher Straße, new KValue( K 4312")));
@@ -1050,17 +1050,17 @@ public class PathTest {
         //      \     /
         //    7--8-->9<--10
 
-        na.setNode(0, 52.503809,13.410198);
-        na.setNode(1, 52.503871,13.410249);
-        na.setNode(2, 52.503751, 13.410377);
-        na.setNode(3, 52.50387, 13.410807);
-        na.setNode(4, 52.503989, 13.41094);
-        na.setNode(5, 52.503794, 13.411024);
-        na.setNode(6, 52.503925, 13.411034);
-        na.setNode(7, 52.503277, 13.41041);
-        na.setNode(8, 52.50344, 13.410545);
-        na.setNode(9, 52.503536, 13.411099);
-        na.setNode(10, 52.503515, 13.411178);
+        na.setNode(0, 52.503809,13.410198, 0);
+        na.setNode(1, 52.503871,13.410249, 0);
+        na.setNode(2, 52.503751, 13.410377, 0);
+        na.setNode(3, 52.50387, 13.410807, 0);
+        na.setNode(4, 52.503989, 13.41094, 0);
+        na.setNode(5, 52.503794, 13.411024, 0);
+        na.setNode(6, 52.503925, 13.411034, 0);
+        na.setNode(7, 52.503277, 13.41041, 0);
+        na.setNode(8, 52.50344, 13.410545, 0);
+        na.setNode(9, 52.503536, 13.411099, 0);
+        na.setNode(10, 52.503515, 13.411178, 0);
 
         g.edge(0, 2).setDistance(5).set(carAccessEnc, true, true).set(footAccessEnc, true, true).setKeyValues(Map.of(STREET_NAME, new KValue("Nordwest")));
         // edge 1-2 does not exist in real world, but we need it to test a few other situations
@@ -1153,12 +1153,12 @@ public class PathTest {
         final BaseGraph graph = new BaseGraph.Builder(carManager).create();
         final NodeAccess na = graph.getNodeAccess();
 
-        na.setNode(1, 52.514, 13.348);
-        na.setNode(2, 52.514, 13.349);
-        na.setNode(3, 52.514, 13.350);
-        na.setNode(4, 52.515, 13.349);
-        na.setNode(5, 52.516, 13.3452);
-        na.setNode(6, 52.516, 13.344);
+        na.setNode(1, 52.514, 13.348, 0);
+        na.setNode(2, 52.514, 13.349, 0);
+        na.setNode(3, 52.514, 13.350, 0);
+        na.setNode(4, 52.515, 13.349, 0);
+        na.setNode(5, 52.516, 13.3452, 0);
+        na.setNode(6, 52.516, 13.344, 0);
 
         graph.edge(1, 2).set(carAvSpeedEnc, 45, 45).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("1-2")));
         graph.edge(4, 5).set(carAvSpeedEnc, 45, 45).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("4-5")));
@@ -1189,25 +1189,25 @@ public class PathTest {
             //        | \
             //        6 [ 9 ] edge 9 is turned off in default mode
 
-            na.setNode(1, 52.514, 13.348);
-            na.setNode(2, 52.514, 13.349);
-            na.setNode(3, 52.5135, 13.35);
-            na.setNode(4, 52.514, 13.351);
-            na.setNode(5, 52.5145, 13.351);
-            na.setNode(6, 52.513, 13.35);
-            na.setNode(7, 52.514, 13.352);
-            na.setNode(8, 52.515, 13.351);
-            na.setNode(9, 52.513, 13.351);
-            na.setNode(10, 52.514, 13.353);
-            na.setNode(11, 52.514, 13.354);
-            na.setNode(12, 52.515, 13.354);
-            na.setNode(13, 52.515, 13.355);
-            na.setNode(14, 52.516, 13.354);
-            na.setNode(15, 52.516, 13.360);
-            na.setNode(16, 52.514, 13.360);
-            na.setNode(17, 52.514, 13.361);
-            na.setNode(18, 52.513, 13.361);
-            na.setNode(19, 52.515, 13.368);
+            na.setNode(1, 52.514, 13.348, 0);
+            na.setNode(2, 52.514, 13.349, 0);
+            na.setNode(3, 52.5135, 13.35, 0);
+            na.setNode(4, 52.514, 13.351, 0);
+            na.setNode(5, 52.5145, 13.351, 0);
+            na.setNode(6, 52.513, 13.35, 0);
+            na.setNode(7, 52.514, 13.352, 0);
+            na.setNode(8, 52.515, 13.351, 0);
+            na.setNode(9, 52.513, 13.351, 0);
+            na.setNode(10, 52.514, 13.353, 0);
+            na.setNode(11, 52.514, 13.354, 0);
+            na.setNode(12, 52.515, 13.354, 0);
+            na.setNode(13, 52.515, 13.355, 0);
+            na.setNode(14, 52.516, 13.354, 0);
+            na.setNode(15, 52.516, 13.360, 0);
+            na.setNode(16, 52.514, 13.360, 0);
+            na.setNode(17, 52.514, 13.361, 0);
+            na.setNode(18, 52.513, 13.361, 0);
+            na.setNode(19, 52.515, 13.368, 0);
 
             // roundabout
             roundaboutEdges.add(g.edge(3, 2).setDistance(5).setKeyValues(Map.of(STREET_NAME, new KValue("2-3"))));

@@ -26,9 +26,11 @@ import com.graphhopper.routing.ev.EdgeIntAccess;
 import com.graphhopper.routing.util.parsers.RelationTagParser;
 import com.graphhopper.routing.util.parsers.TagParser;
 import com.graphhopper.storage.IntsRef;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class OSMParsers {
@@ -72,19 +74,11 @@ public class OSMParsers {
 
     public boolean acceptWay(ReaderWay way) {
         String highway = way.getTag("highway");
-        if (highway != null)
-            return !ignoredHighways.contains(highway);
-        else if (way.getTag("route") != null)
-            // we accept *all* ways with a 'route' tag and no 'highway' tag, because most of them are ferries
-            // (route=ferry), which we want, and there aren't so many such ways we do not want
-            // https://github.com/graphhopper/graphhopper/pull/2702#discussion_r1038093050
+        // 只要有highway标签，没有highway标签就忽略这条边
+        if (StringUtils.isNotBlank(highway)) {
             return true;
-        else if ("pier".equals(way.getTag("man_made")))
-            return true;
-        else if ("platform".equals(way.getTag("railway")))
-            return true;
-        else
-            return false;
+        }
+        return false;
     }
 
     public IntsRef handleRelationTags(ReaderRelation relation, IntsRef relFlags) {

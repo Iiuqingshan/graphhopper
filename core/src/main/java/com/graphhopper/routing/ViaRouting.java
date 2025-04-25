@@ -31,6 +31,7 @@ import com.graphhopper.util.EdgeIterator;
 import com.graphhopper.util.EdgeIteratorState;
 import com.graphhopper.util.Helper;
 import com.graphhopper.util.shapes.GHPoint;
+import com.graphhopper.util.shapes.GHPointIndoor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,8 @@ public class ViaRouting {
         IntArrayList pointsNotFound = new IntArrayList();
         for (int placeIndex = 0; placeIndex < points.size(); placeIndex++) {
             GHPoint point = points.get(placeIndex);
+            GHPointIndoor pointIndoor = (GHPointIndoor) point;
+            int level = pointIndoor.getLevel();
             Snap snap = null;
             if (placeIndex < headings.size() && !Double.isNaN(headings.get(placeIndex))) {
                 if (!pointHints.isEmpty() && !Helper.isEmpty(pointHints.get(placeIndex)))
@@ -78,6 +81,9 @@ public class ViaRouting {
                         pointHints.get(placeIndex), point, 170));
             } else if (!snapPreventions.isEmpty()) {
                 snap = locationIndex.findClosest(point.lat, point.lon, strictEdgeFilter);
+            } else {
+                // 默认使用室内边过滤器
+                snap = locationIndex.findClosest(point.lat, point.lon, new IndoorEdgeFilter(level));
             }
 
             if (snap == null || !snap.isValid())

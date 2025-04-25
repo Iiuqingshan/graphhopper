@@ -63,18 +63,18 @@ public class PathSimplificationTest {
         // | | |  |
         // 6-7-8--*
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 1.2, 1.0);
-        na.setNode(1, 1.2, 1.1);
-        na.setNode(2, 1.2, 1.2);
-        na.setNode(3, 1.1, 1.0);
-        na.setNode(4, 1.1, 1.1);
-        na.setNode(5, 1.1, 1.2);
-        na.setNode(9, 1.1, 1.3);
-        na.setNode(10, 1.1, 1.4);
+        na.setNode(0, 1.2, 1.0, 0);
+        na.setNode(1, 1.2, 1.1, 0);
+        na.setNode(2, 1.2, 1.2, 0);
+        na.setNode(3, 1.1, 1.0, 0);
+        na.setNode(4, 1.1, 1.1, 0);
+        na.setNode(5, 1.1, 1.2, 0);
+        na.setNode(9, 1.1, 1.3, 0);
+        na.setNode(10, 1.1, 1.4, 0);
 
-        na.setNode(6, 1.0, 1.0);
-        na.setNode(7, 1.0, 1.1);
-        na.setNode(8, 1.0, 1.2);
+        na.setNode(6, 1.0, 1.0, 0);
+        na.setNode(7, 1.0, 1.1, 0);
+        na.setNode(8, 1.0, 1.2, 0);
 
         g.edge(0, 1).set(speedEnc, 9).setDistance(10000).setKeyValues(Map.of(STREET_NAME, new KValue("0-1")));
         g.edge(1, 2).set(speedEnc, 9).setDistance(11000).setKeyValues(Map.of(STREET_NAME, new KValue("1-2")));
@@ -177,9 +177,9 @@ public class PathSimplificationTest {
 
         // check points were modified correctly
         assertEquals(5, points.size());
-        origPoints.set(1, Double.NaN, Double.NaN, Double.NaN);
-        origPoints.set(2, Double.NaN, Double.NaN, Double.NaN);
-        origPoints.set(5, Double.NaN, Double.NaN, Double.NaN);
+        origPoints.set(1, Double.NaN, Double.NaN, Double.NaN, 0);
+        origPoints.set(2, Double.NaN, Double.NaN, Double.NaN, 0);
+        origPoints.set(5, Double.NaN, Double.NaN, Double.NaN, 0);
         RamerDouglasPeucker.removeNaN(origPoints);
         assertEquals(origPoints, points);
 
@@ -251,10 +251,10 @@ public class PathSimplificationTest {
 
         // check points were modified correctly
         assertEquals(12, points.size());
-        origPoints.set(1, Double.NaN, Double.NaN, Double.NaN);
-        origPoints.set(2, Double.NaN, Double.NaN, Double.NaN);
-        origPoints.set(5, Double.NaN, Double.NaN, Double.NaN);
-        origPoints.set(13, Double.NaN, Double.NaN, Double.NaN);
+        origPoints.set(1, Double.NaN, Double.NaN, Double.NaN, 0);
+        origPoints.set(2, Double.NaN, Double.NaN, Double.NaN, 0);
+        origPoints.set(5, Double.NaN, Double.NaN, Double.NaN, 0);
+        origPoints.set(13, Double.NaN, Double.NaN, Double.NaN, 0);
         RamerDouglasPeucker.removeNaN(origPoints);
         assertEquals(origPoints, points);
 

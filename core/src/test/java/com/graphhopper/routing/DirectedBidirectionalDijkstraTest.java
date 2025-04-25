@@ -454,12 +454,12 @@ public class DirectedBidirectionalDijkstraTest {
         graph.edge(4, 5).setDistance(1).set(speedEnc, 10, 0);
         graph.edge(5, 0).setDistance(1).set(speedEnc, 10, 0);
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 1, 0);
-        na.setNode(1, 1, 1);
-        na.setNode(2, 1, 2);
-        na.setNode(3, 0, 2);
-        na.setNode(4, 0, 1);
-        na.setNode(5, 0, 0);
+        na.setNode(0, 1, 0, 0);
+        na.setNode(1, 1, 1, 0);
+        na.setNode(2, 1, 2, 0);
+        na.setNode(3, 0, 2, 0);
+        na.setNode(4, 0, 1, 0);
+        na.setNode(5, 0, 0, 0);
 
         LocationIndexTree locationIndex = new LocationIndexTree(graph, graph.getDirectory());
         locationIndex.prepareIndex();

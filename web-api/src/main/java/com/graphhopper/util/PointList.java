@@ -42,7 +42,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
     private static final GeometryFactory factory = new GeometryFactory();
     public static final PointList EMPTY = new PointList(0, true) {
         @Override
-        public void set(int index, double lat, double lon, double ele) {
+        public void set(int index, double lat, double lon, double ele, int level) {
             throw new RuntimeException("cannot change EMPTY PointList");
         }
 
@@ -133,6 +133,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
     private double[] latitudes;
     private double[] longitudes;
     private double[] elevations;
+    private int[] levels;
     private boolean isImmutable = false;
     private LineString cachedLineString;
 
@@ -143,6 +144,7 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
     public PointList(int cap, boolean is3D) {
         latitudes = new double[cap];
         longitudes = new double[cap];
+        levels = new int[cap];
         this.is3D = is3D;
         if (is3D)
             elevations = new double[cap];
@@ -166,17 +168,18 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
     }
 
     @Override
-    public void setNode(int nodeId, double lat, double lon, double ele) {
-        set(nodeId, lat, lon, ele);
+    public void setNode(int nodeId, double lat, double lon, double ele, int level) {
+        set(nodeId, lat, lon, ele, level);
     }
 
-    public void set(int index, double lat, double lon, double ele) {
+    public void set(int index, double lat, double lon, double ele, int level) {
         ensureMutability();
         if (index >= size)
             throw new ArrayIndexOutOfBoundsException("index has to be smaller than size " + size);
 
         latitudes[index] = lat;
         longitudes[index] = lon;
+        levels[index] = level;
         if (is3D)
             elevations[index] = ele;
         else if (!Double.isNaN(ele))
@@ -281,6 +284,11 @@ public class PointList implements Iterable<GHPoint3D>, PointAccess {
             return Double.NaN;
 
         return elevations[index];
+    }
+
+    @Override
+    public int getLevel(int index) {
+        return levels[index];
     }
 
     public void setElevation(int index, double ele) {

@@ -39,6 +39,7 @@ public class Helper {
     // milli meter is a bit extreme but we have 3 bytes
     private static final float ELE_FACTOR = 1000f;
     private static final int MAX_ELE_UINT = (int) ((10_000 + 1000) * ELE_FACTOR);
+    private static final int LEVEL = 0;
 
     private Helper() {
     }

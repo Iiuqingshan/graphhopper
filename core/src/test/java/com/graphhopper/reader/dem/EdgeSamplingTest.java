@@ -30,7 +30,7 @@ public class EdgeSamplingTest {
 
     private PointList round(PointList list) {
         for (int i = 0; i < list.size(); i++) {
-            list.set(i, round(list.getLat(i)), round(list.getLon(i)), list.getEle(i));
+            list.set(i, round(list.getLat(i)), round(list.getLon(i)), list.getEle(i), list.getLevel(i));
         }
         return list;
     }

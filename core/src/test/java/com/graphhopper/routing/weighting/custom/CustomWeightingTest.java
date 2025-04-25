@@ -252,10 +252,10 @@ class CustomWeightingTest {
                 set(roadClassEnc, PRIMARY).set(avSpeedEnc, 80);
         EdgeIteratorState edge2 = graph.edge(2, 3).setDistance(10).
                 set(roadClassEnc, PRIMARY).set(avSpeedEnc, 80);
-        graph.getNodeAccess().setNode(0, 50.0120, 11.582);
-        graph.getNodeAccess().setNode(1, 50.0125, 11.585);
-        graph.getNodeAccess().setNode(2, 40.0, 8.0);
-        graph.getNodeAccess().setNode(3, 40.1, 8.1);
+        graph.getNodeAccess().setNode(0, 50.0120, 11.582, 0);
+        graph.getNodeAccess().setNode(1, 50.0125, 11.585, 0);
+        graph.getNodeAccess().setNode(2, 40.0, 8.0, 0);
+        graph.getNodeAccess().setNode(3, 40.1, 8.1, 0);
         CustomModel customModel = createSpeedCustomModel(avSpeedEnc).setDistanceInfluence(70d).
                 addToPriority(If("in_custom1", MULTIPLY, "0.5"));
 

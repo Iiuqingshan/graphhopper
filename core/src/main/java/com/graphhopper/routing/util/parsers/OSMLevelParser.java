@@ -6,7 +6,7 @@ import com.graphhopper.routing.ev.IntEncodedValue;
 import com.graphhopper.routing.ev.StringEncodedValue;
 import com.graphhopper.storage.IntsRef;
 
-public class OSMLevelParser implements TagParser{
+public class OSMLevelParser implements TagParser {
 
     IntEncodedValue levelEnc;
 

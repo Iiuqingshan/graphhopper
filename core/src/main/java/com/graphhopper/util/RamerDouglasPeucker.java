@@ -154,7 +154,7 @@ public class RamerDouglasPeucker {
         int counter = 0;
         if (maxDist < normedMaxDist) {
             for (int i = fromIndex + 1; i < lastIndex; i++) {
-                points.set(i, Double.NaN, Double.NaN, Double.NaN);
+                points.set(i, Double.NaN, Double.NaN, Double.NaN, Integer.MIN_VALUE);
                 counter++;
             }
         } else {
@@ -171,7 +171,7 @@ public class RamerDouglasPeucker {
         int curr = 0;
         for (int i = 0; i < pointList.size(); i++) {
             if (!Double.isNaN(pointList.getLat(i))) {
-                pointList.set(curr, pointList.getLat(i), pointList.getLon(i), pointList.getEle(i));
+                pointList.set(curr, pointList.getLat(i), pointList.getLon(i), pointList.getEle(i), pointList.getLevel(i));
                 curr++;
             }
         }

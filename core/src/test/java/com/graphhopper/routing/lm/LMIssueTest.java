@@ -113,11 +113,11 @@ public class LMIssueTest {
         //       3 |
         // 2 --<----
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 49.405150, 9.709054);
-        na.setNode(1, 49.403705, 9.700517);
-        na.setNode(2, 49.400112, 9.700209);
-        na.setNode(3, 49.403009, 9.708364);
-        na.setNode(4, 49.409021, 9.703622);
+        na.setNode(0, 49.405150, 9.709054, 0);
+        na.setNode(1, 49.403705, 9.700517, 0);
+        na.setNode(2, 49.400112, 9.700209, 0);
+        na.setNode(3, 49.403009, 9.708364, 0);
+        na.setNode(4, 49.409021, 9.703622, 0);
         // 30s
         graph.edge(4, 3).setDistance(1000).set(speedEnc, 120, 120);
         graph.edge(0, 2).setDistance(1000).set(speedEnc, 120, 0);
@@ -150,16 +150,16 @@ public class LMIssueTest {
         //          \     /
         //            ->-
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 49.406987, 9.709767);
-        na.setNode(1, 49.403612, 9.702953);
-        na.setNode(2, 49.409755, 9.706517);
-        na.setNode(3, 49.409021, 9.708649);
-        na.setNode(4, 49.400674, 9.700906);
-        na.setNode(5, 49.408735, 9.709486);
-        na.setNode(6, 49.406402, 9.700937);
-        na.setNode(7, 49.406965, 9.702660);
-        na.setNode(8, 49.405227, 9.702863);
-        na.setNode(9, 49.409411, 9.709085);
+        na.setNode(0, 49.406987, 9.709767, 0);
+        na.setNode(1, 49.403612, 9.702953, 0);
+        na.setNode(2, 49.409755, 9.706517, 0);
+        na.setNode(3, 49.409021, 9.708649, 0);
+        na.setNode(4, 49.400674, 9.700906, 0);
+        na.setNode(5, 49.408735, 9.709486, 0);
+        na.setNode(6, 49.406402, 9.700937, 0);
+        na.setNode(7, 49.406965, 9.702660, 0);
+        na.setNode(8, 49.405227, 9.702863, 0);
+        na.setNode(9, 49.409411, 9.709085, 0);
         graph.edge(0, 1).setDistance(623.197000).set(speedEnc, 112, 112);
         graph.edge(5, 1).setDistance(741.414000).set(speedEnc, 13, 13);
         graph.edge(9, 4).setDistance(1140.835000).set(speedEnc, 35, 35);

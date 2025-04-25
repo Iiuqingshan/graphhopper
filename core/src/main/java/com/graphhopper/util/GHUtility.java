@@ -200,7 +200,7 @@ public class GHUtility {
         for (int i = 0; i < numNodes; ++i) {
             double lat = 49.4 + (random.nextDouble() * 0.01);
             double lon = 9.7 + (random.nextDouble() * 0.01);
-            graph.getNodeAccess().setNode(i, lat, lon);
+            graph.getNodeAccess().setNode(i, lat, lon, 0);
         }
         double minDist = Double.MAX_VALUE;
         double maxDist = Double.MIN_VALUE;
@@ -438,10 +438,10 @@ public class GHUtility {
     public static void updateDistancesFor(Graph g, int node, double... latlonele) {
         NodeAccess na = g.getNodeAccess();
         if (latlonele.length == 3)
-            na.setNode(node, latlonele[0], latlonele[1], latlonele[2]);
+            na.setNode(node, latlonele[0], latlonele[1], latlonele[2], 0);
         else if (latlonele.length == 2) {
             if (na.is3D()) throw new IllegalArgumentException("graph requires elevation");
-            na.setNode(node, latlonele[0], latlonele[1]);
+            na.setNode(node, latlonele[0], latlonele[1], 0);
         } else
             throw new IllegalArgumentException("illegal number of arguments " + latlonele.length);
         EdgeIterator iter = g.createEdgeExplorer().setBaseNode(node);

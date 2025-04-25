@@ -118,8 +118,6 @@ public class RouteResource {
         initHints(request.getHints(), uriInfo.getQueryParameters());
 
         logger.info("==========================");
-        logger.info("qingshan check. profile: {}", profileName);
-
         if (minPathElevationPrecision != null)
             request.getHints().putObject(ELEVATION_WAY_POINT_MAX_DISTANCE, minPathElevationPrecision);
 

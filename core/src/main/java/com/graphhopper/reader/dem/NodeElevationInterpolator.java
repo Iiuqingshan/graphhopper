@@ -56,7 +56,8 @@ public class NodeElevationInterpolator {
         for (int innerNodeId : innerNodeIds) {
             double lat = nodeAccess.getLat(innerNodeId);
             double lon = nodeAccess.getLon(innerNodeId);
-            nodeAccess.setNode(innerNodeId, lat, lon, ele);
+            int level = nodeAccess.getLevel(innerNodeId);
+            nodeAccess.setNode(innerNodeId, lat, lon, ele, level);
         }
     }
 
@@ -74,9 +75,10 @@ public class NodeElevationInterpolator {
         for (int innerNodeId : innerNodeIds) {
             double lat = nodeAccess.getLat(innerNodeId);
             double lon = nodeAccess.getLon(innerNodeId);
+            int level = nodeAccess.getLevel(innerNodeId);
             double ele = elevationInterpolator.calculateElevationBasedOnTwoPoints(lat, lon, lat0, lon0, ele0,
                     lat1, lon1, ele1);
-            nodeAccess.setNode(innerNodeId, lat, lon, ele);
+            nodeAccess.setNode(innerNodeId, lat, lon, ele, level);
         }
     }
 
@@ -98,9 +100,10 @@ public class NodeElevationInterpolator {
         for (int innerNodeId : innerNodeIds) {
             double lat = nodeAccess.getLat(innerNodeId);
             double lon = nodeAccess.getLon(innerNodeId);
+            int level = nodeAccess.getLevel(innerNodeId);
             double ele = elevationInterpolator.calculateElevationBasedOnThreePoints(lat, lon, lat0,
                     lon0, ele0, lat1, lon1, ele1, lat2, lon2, ele2);
-            nodeAccess.setNode(innerNodeId, lat, lon, ele);
+            nodeAccess.setNode(innerNodeId, lat, lon, ele, level);
         }
     }
 
@@ -115,8 +118,9 @@ public class NodeElevationInterpolator {
         for (int innerNodeId : innerNodeIds) {
             double lat = nodeAccess.getLat(innerNodeId);
             double lon = nodeAccess.getLon(innerNodeId);
+            int level = nodeAccess.getLevel(innerNodeId);
             double ele = elevationInterpolator.calculateElevationBasedOnPointList(lat, lon, pointList);
-            nodeAccess.setNode(innerNodeId, lat, lon, ele);
+            nodeAccess.setNode(innerNodeId, lat, lon, ele, level);
         }
     }
 }

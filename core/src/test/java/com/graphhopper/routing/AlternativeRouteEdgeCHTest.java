@@ -150,9 +150,9 @@ public class AlternativeRouteEdgeCHTest {
         final BaseGraph graph = new BaseGraph.Builder(em).withTurnCosts(true).create();
         TurnCostStorage tcs = graph.getTurnCostStorage();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(3, 45.0, 10.0);
-        na.setNode(2, 45.0, 10.1);
-        na.setNode(1, 44.9, 10.1);
+        na.setNode(3, 45.0, 10.0, 0);
+        na.setNode(2, 45.0, 10.1, 0);
+        na.setNode(1, 44.9, 10.1, 0);
         // 3-2
         //  \|
         //   1

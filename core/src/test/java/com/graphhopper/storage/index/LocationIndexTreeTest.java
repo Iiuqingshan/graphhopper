@@ -60,13 +60,13 @@ public class LocationIndexTreeTest {
         //    |-2 -1 0 1 2 3 4
         //
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, -1, -2);
-        na.setNode(1, 2, -1);
-        na.setNode(2, 0, 1);
-        na.setNode(3, 1, 2);
-        na.setNode(4, 6, 1);
-        na.setNode(5, 4, 4);
-        na.setNode(6, 4.5, -0.5);
+        na.setNode(0, -1, -2, 0);
+        na.setNode(1, 2, -1, 0);
+        na.setNode(2, 0, 1, 0);
+        na.setNode(3, 1, 2, 0);
+        na.setNode(4, 6, 1, 0);
+        na.setNode(5, 4, 4, 0);
+        na.setNode(6, 4.5, -0.5, 0);
         List<EdgeIteratorState> list = Arrays.asList(
                 g.edge(0, 1),
                 g.edge(0, 2),
@@ -93,11 +93,11 @@ public class LocationIndexTreeTest {
     Graph createTestGraph(EncodingManager em, DecimalEncodedValue speedEnc) {
         BaseGraph graph = new BaseGraph.Builder(em).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 0.5, -0.5);
-        na.setNode(1, -0.5, -0.5);
-        na.setNode(2, -1, -1);
-        na.setNode(3, -0.4, 0.9);
-        na.setNode(4, -0.6, 1.6);
+        na.setNode(0, 0.5, -0.5, 0);
+        na.setNode(1, -0.5, -0.5, 0);
+        na.setNode(2, -1, -1, 0);
+        na.setNode(3, -0.4, 0.9, 0);
+        na.setNode(4, -0.6, 1.6, 0);
         graph.edge(0, 1).set(speedEnc, 60, 60);
         graph.edge(0, 2).set(speedEnc, 60, 60);
         graph.edge(0, 4).set(speedEnc, 60, 60);
@@ -152,10 +152,10 @@ public class LocationIndexTreeTest {
     public void testMoreReal() {
         BaseGraph graph = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(1, 51.2492152, 9.4317166);
-        na.setNode(0, 52, 9);
-        na.setNode(2, 51.2, 9.4);
-        na.setNode(3, 49, 10);
+        na.setNode(1, 51.2492152, 9.4317166, 0);
+        na.setNode(0, 52, 9, 0);
+        na.setNode(2, 51.2, 9.4, 0);
+        na.setNode(3, 49, 10, 0);
 
         graph.edge(1, 0).set(speedEnc, 60, 60);
         graph.edge(0, 2).set(speedEnc, 60, 60);
@@ -176,11 +176,11 @@ public class LocationIndexTreeTest {
     private Graph createTestGraphWithWayGeometry() {
         BaseGraph graph = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 0.5, -0.5);
-        na.setNode(1, -0.5, -0.5);
-        na.setNode(2, -1, -1);
-        na.setNode(3, -0.4, 0.9);
-        na.setNode(4, -0.6, 1.6);
+        na.setNode(0, 0.5, -0.5, 0);
+        na.setNode(1, -0.5, -0.5, 0);
+        na.setNode(2, -1, -1, 0);
+        na.setNode(3, -0.4, 0.9, 0);
+        na.setNode(4, -0.6, 1.6, 0);
         graph.edge(0, 1).set(speedEnc, 60, 60);
         graph.edge(0, 2).set(speedEnc, 60, 60);
         // insert A and B, without this we would get 0 for 0,0
@@ -206,10 +206,10 @@ public class LocationIndexTreeTest {
     public void testFindingWayGeometry() {
         BaseGraph g = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = g.getNodeAccess();
-        na.setNode(10, 51.2492152, 9.4317166);
-        na.setNode(20, 52, 9);
-        na.setNode(30, 51.2, 9.4);
-        na.setNode(50, 49, 10);
+        na.setNode(10, 51.2492152, 9.4317166, 0);
+        na.setNode(20, 52, 9, 0);
+        na.setNode(30, 51.2, 9.4, 0);
+        na.setNode(50, 49, 10, 0);
         g.edge(20, 50).set(speedEnc, 60, 60).setWayGeometry(Helper.createPointList(51.25, 9.43));
         g.edge(10, 20).set(speedEnc, 60, 60);
         g.edge(20, 30).set(speedEnc, 60, 60);
@@ -232,53 +232,47 @@ public class LocationIndexTreeTest {
         BaseGraph graph = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = graph.getNodeAccess();
 
-        na.setNode(0, 49.94653, 11.57114);
-        na.setNode(1, 49.94653, 11.57214);
-        na.setNode(2, 49.94653, 11.57314);
-        na.setNode(3, 49.94653, 11.57414);
-        na.setNode(4, 49.94653, 11.57514);
-        na.setNode(5, 49.94653, 11.57614);
-        na.setNode(6, 49.94653, 11.57714);
-        na.setNode(7, 49.94653, 11.57814);
+        na.setNode(0, 49.94653, 11.57114, 0);
+        na.setNode(1, 49.94653, 11.57214, 0);
+        na.setNode(2, 49.94653, 11.57314, 0);
+        na.setNode(3, 49.94653, 11.57414, 0);
+        na.setNode(4, 49.94653, 11.57514, 0);
+        na.setNode(5, 49.94653, 11.57614, 0);
+        na.setNode(6, 49.94653, 11.57714, 0);
+        na.setNode(7, 49.94653, 11.57814, 0);
+        na.setNode(8, 49.94553, 11.57214, 0);
+        na.setNode(9, 49.94553, 11.57314, 0);
+        na.setNode(10, 49.94553, 11.57414, 0);
+        na.setNode(11, 49.94553, 11.57514, 0);
+        na.setNode(12, 49.94553, 11.57614, 0);
+        na.setNode(13, 49.94553, 11.57714, 0);
+        na.setNode(14, 49.94753, 11.57214, 0);
+        na.setNode(15, 49.94753, 11.57314, 0);
+        na.setNode(16, 49.94753, 11.57614, 0);
+        na.setNode(17, 49.94753, 11.57814, 0);
 
-        na.setNode(8, 49.94553, 11.57214);
-        na.setNode(9, 49.94553, 11.57314);
-        na.setNode(10, 49.94553, 11.57414);
-        na.setNode(11, 49.94553, 11.57514);
-        na.setNode(12, 49.94553, 11.57614);
-        na.setNode(13, 49.94553, 11.57714);
-
-        na.setNode(14, 49.94753, 11.57214);
-        na.setNode(15, 49.94753, 11.57314);
-        na.setNode(16, 49.94753, 11.57614);
-        na.setNode(17, 49.94753, 11.57814);
-
-        na.setNode(18, 49.94853, 11.57114);
-        na.setNode(19, 49.94853, 11.57214);
-        na.setNode(20, 49.94853, 11.57814);
-
-        na.setNode(21, 49.94953, 11.57214);
-        na.setNode(22, 49.94953, 11.57614);
-
-        na.setNode(23, 49.95053, 11.57114);
-        na.setNode(24, 49.95053, 11.57214);
-        na.setNode(25, 49.95053, 11.57314);
-        na.setNode(26, 49.95053, 11.57514);
-        na.setNode(27, 49.95053, 11.57614);
-        na.setNode(28, 49.95053, 11.57714);
-        na.setNode(29, 49.95053, 11.57814);
-
-        na.setNode(30, 49.95153, 11.57214);
-        na.setNode(31, 49.95153, 11.57314);
-        na.setNode(32, 49.95153, 11.57514);
-        na.setNode(33, 49.95153, 11.57614);
-        na.setNode(34, 49.95153, 11.57714);
-
+        na.setNode(18, 49.94853, 11.57114, 0);
+        na.setNode(19, 49.94853, 11.57214, 0);
+        na.setNode(20, 49.94853, 11.57814, 0);
+        na.setNode(21, 49.94953, 11.57214, 0);
+        na.setNode(22, 49.94953, 11.57614, 0);
+        na.setNode(23, 49.95053, 11.57114, 0);
+        na.setNode(24, 49.95053, 11.57214, 0);
+        na.setNode(25, 49.95053, 11.57314, 0);
+        na.setNode(26, 49.95053, 11.57514, 0);
+        na.setNode(27, 49.95053, 11.57614, 0);
+        na.setNode(28, 49.95053, 11.57714, 0);
+        na.setNode(29, 49.95053, 11.57814, 0);
+        na.setNode(30, 49.95153, 11.57214, 0);
+        na.setNode(31, 49.95153, 11.57314, 0);
+        na.setNode(32, 49.95153, 11.57514, 0);
+        na.setNode(33, 49.95153, 11.57614, 0);
+        na.setNode(34, 49.95153, 11.57714, 0);
         // to create correct bounds
         // bottom left
-        na.setNode(100, 49.941, 11.56614);
+        na.setNode(100, 49.941, 11.56614, 0);
         // top right
-        na.setNode(101, 49.96053, 11.58814);
+        na.setNode(101, 49.96053, 11.58814, 0);
 
         graph.edge(0, 1).set(speedEnc, 60, 60);
         graph.edge(1, 2).set(speedEnc, 60, 60);
@@ -347,7 +341,7 @@ public class LocationIndexTreeTest {
         for (int latIdx = 0; latIdx < MAX; latIdx++) {
             for (int lonIdx = 0; lonIdx < MAX; lonIdx++) {
                 int index = lonIdx * 10 + latIdx;
-                na.setNode(index, 0.01 * latIdx, 0.01 * lonIdx);
+                na.setNode(index, 0.01 * latIdx, 0.01 * lonIdx, 0);
                 if (latIdx < MAX - 1)
                     GHUtility.setSpeed(60, true, true, carAccessEnc, carSpeedEnc, graph.edge(index, index + 1));
 
@@ -387,14 +381,14 @@ public class LocationIndexTreeTest {
     public void testCrossBoundaryNetwork_issue667() {
         BaseGraph graph = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 0.1, 179.5);
-        na.setNode(1, 0.1, 179.9);
-        na.setNode(2, 0.1, -179.8);
-        na.setNode(3, 0.1, -179.5);
-        na.setNode(4, 0, 179.5);
-        na.setNode(5, 0, 179.9);
-        na.setNode(6, 0, -179.8);
-        na.setNode(7, 0, -179.5);
+        na.setNode(0, 0.1, 179.5, 0);
+        na.setNode(1, 0.1, 179.9, 0);
+        na.setNode(2, 0.1, -179.8, 0);
+        na.setNode(3, 0.1, -179.5, 0);
+        na.setNode(4, 0, 179.5, 0);
+        na.setNode(5, 0, 179.9, 0);
+        na.setNode(6, 0, -179.8, 0);
+        na.setNode(7, 0, -179.5, 0);
 
         // just use 1 as distance which is incorrect but does not matter in this unit case
         graph.edge(0, 1).set(speedEnc, 60, 60);
@@ -509,7 +503,7 @@ public class LocationIndexTreeTest {
         NodeAccess na = g.getNodeAccess();
         Random rand = new Random(12);
         for (int i = 0; i < locs; i++) {
-            na.setNode(i, (float) rand.nextDouble() * 10 + 10, (float) rand.nextDouble() * 10 + 10);
+            na.setNode(i, (float) rand.nextDouble() * 10 + 10, (float) rand.nextDouble() * 10 + 10, 0);
         }
         createIndexNoPrepare(g, 200).prepareIndex();
         g.close();
@@ -536,39 +530,39 @@ public class LocationIndexTreeTest {
 //   lon: 0   1   2   3   4   5
         int a0 = 0;
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 0, 1.0001f);
+        na.setNode(0, 0, 1.0001f, 0);
         int b1 = 1;
-        na.setNode(1, 1, 2);
+        na.setNode(1, 1, 2, 0);
         int c2 = 2;
-        na.setNode(2, 0.5f, 4.5f);
+        na.setNode(2, 0.5f, 4.5f, 0);
         int d3 = 3;
-        na.setNode(3, 1.5f, 3.8f);
+        na.setNode(3, 1.5f, 3.8f, 0);
         int e4 = 4;
-        na.setNode(4, 2.01f, 0.5f);
+        na.setNode(4, 2.01f, 0.5f, 0);
         int f5 = 5;
-        na.setNode(5, 2, 3);
+        na.setNode(5, 2, 3, 0);
         int g6 = 6;
-        na.setNode(6, 3, 1.5f);
+        na.setNode(6, 3, 1.5f, 0);
         int h7 = 7;
-        na.setNode(7, 2.99f, 3.01f);
+        na.setNode(7, 2.99f, 3.01f, 0);
         int i8 = 8;
-        na.setNode(8, 3, 4);
+        na.setNode(8, 3, 4, 0);
         int j9 = 9;
-        na.setNode(9, 3.3f, 2.2f);
+        na.setNode(9, 3.3f, 2.2f, 0);
         int k10 = 10;
-        na.setNode(10, 4, 1);
+        na.setNode(10, 4, 1, 0);
         int l11 = 11;
-        na.setNode(11, 4.1f, 3);
+        na.setNode(11, 4.1f, 3, 0);
         int m12 = 12;
-        na.setNode(12, 4, 4.5f);
+        na.setNode(12, 4, 4.5f, 0);
         int n13 = 13;
-        na.setNode(13, 4.5f, 4.1f);
+        na.setNode(13, 4.5f, 4.1f, 0);
         int o14 = 14;
-        na.setNode(14, 5, 0);
+        na.setNode(14, 5, 0, 0);
         int p15 = 15;
-        na.setNode(15, 4.9f, 2.5f);
+        na.setNode(15, 4.9f, 2.5f, 0);
         int q16 = 16;
-        na.setNode(16, 5, 5);
+        na.setNode(16, 5, 5, 0);
         // => 17 locations
 
         graph.edge(a0, b1).set(speedEnc, 60, 60);
@@ -627,8 +621,8 @@ public class LocationIndexTreeTest {
         // 0 - 1
         BaseGraph graph = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 51.985500, 19.254000);
-        na.setNode(1, 51.986000, 19.255000);
+        na.setNode(0, 51.985500, 19.254000, 0);
+        na.setNode(1, 51.986000, 19.255000, 0);
         DistancePlaneProjection distCalc = new DistancePlaneProjection();
         // we query the location index close to node 0. since the query point is so close to the tower node we expect
         // a TOWER snap. this should not depend on whether node 0 is the base or adj node of our edge.
@@ -651,8 +645,8 @@ public class LocationIndexTreeTest {
         // 0 -x- 1
         BaseGraph graph = new BaseGraph.Builder(encodingManager).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 51.985000, 19.254000);
-        na.setNode(1, 51.986000, 19.255000);
+        na.setNode(0, 51.985000, 19.254000, 0);
+        na.setNode(1, 51.986000, 19.255000, 0);
         DistancePlaneProjection distCalc = new DistancePlaneProjection();
         EdgeIteratorState edge = graph.edge(0, 1).setDistance(distCalc.calcDist(na.getLat(0), na.getLon(0), na.getLat(1), na.getLon(1)));
         edge.setWayGeometry(Helper.createPointList(51.985500, 19.254500));

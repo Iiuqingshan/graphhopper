@@ -135,7 +135,7 @@ public abstract class AbstractGraphStorageTester {
         graph = createGHStorage();
         NodeAccess na = graph.getNodeAccess();
         for (int i = 0; i < defaultSize * 2; i++) {
-            na.setNode(i, 2 * i, 3 * i);
+            na.setNode(i, 2 * i, 3 * i, 0);
         }
         graph.edge(defaultSize + 1, defaultSize + 2).setDistance(10);
         graph.edge(defaultSize + 1, defaultSize + 3).setDistance(10);
@@ -280,8 +280,8 @@ public abstract class AbstractGraphStorageTester {
     public void testGetLocations() {
         graph = createGHStorage();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 12, 23);
-        na.setNode(1, 22, 23);
+        na.setNode(0, 12, 23, 0);
+        na.setNode(1, 22, 23, 0);
         assertEquals(2, graph.getNodes());
 
         graph.edge(0, 1).setDistance(10).set(carAccessEnc, true, true);
@@ -304,12 +304,12 @@ public abstract class AbstractGraphStorageTester {
 
     protected void initExampleGraph(Graph g) {
         NodeAccess na = g.getNodeAccess();
-        na.setNode(0, 12, 23);
-        na.setNode(1, 38.33f, 135.3f);
-        na.setNode(2, 6, 139);
-        na.setNode(3, 78, 89);
-        na.setNode(4, 2, 1);
-        na.setNode(5, 7, 5);
+        na.setNode(0, 12, 23, 0);
+        na.setNode(1, 38.33f, 135.3f, 0);
+        na.setNode(2, 6, 139, 0);
+        na.setNode(3, 78, 89, 0);
+        na.setNode(4, 2, 1, 0);
+        na.setNode(5, 7, 5, 0);
         g.edge(0, 1).setDistance((12)).set(carAccessEnc, true, true);
         g.edge(0, 2).setDistance((212)).set(carAccessEnc, true, true);
         g.edge(0, 3).setDistance((212)).set(carAccessEnc, true, true);
@@ -409,7 +409,7 @@ public abstract class AbstractGraphStorageTester {
         graph = createGHStorage();
         // no nodes added yet
         assertThrows(IllegalArgumentException.class, () -> getCountAll(1));
-        graph.getNodeAccess().setNode(1, 0, 0);
+        graph.getNodeAccess().setNode(1, 0, 0, 0);
         assertEquals(0, getCountAll(1));
         graph.edge(0, 1).setDistance(12).set(carAccessEnc, true, true);
         assertEquals(1, getCountAll(1));
@@ -422,11 +422,11 @@ public abstract class AbstractGraphStorageTester {
         assertEquals(BBox.createInverse(false).maxLat, b.maxLat, 1e-6);
 
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 10, 20);
+        na.setNode(0, 10, 20, 0);
         assertEquals(10, b.maxLat, 1e-6);
         assertEquals(20, b.maxLon, 1e-6);
 
-        na.setNode(0, 15, -15);
+        na.setNode(0, 15, -15, 0);
         assertEquals(15, b.maxLat, 1e-6);
         assertEquals(20, b.maxLon, 1e-6);
         assertEquals(10, b.minLat, 1e-6);
@@ -547,10 +547,10 @@ public abstract class AbstractGraphStorageTester {
     public void testPillarNodes() {
         graph = createGHStorage();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 0.01, 0.01);
-        na.setNode(4, 0.4, 0.4);
-        na.setNode(14, 0.14, 0.14);
-        na.setNode(10, 0.99, 0.99);
+        na.setNode(0, 0.01, 0.01, 0);
+        na.setNode(4, 0.4, 0.4, 0);
+        na.setNode(14, 0.14, 0.14, 0);
+        na.setNode(10, 0.99, 0.99, 0);
 
         PointList pointList = Helper.createPointList(1, 1, 1, 2, 1, 3);
         EdgeIteratorState edge = graph.edge(0, 4).setDistance(100).setWayGeometry(pointList);
@@ -722,7 +722,7 @@ public abstract class AbstractGraphStorageTester {
         assertTrue(na.is3D());
         na.setNode(0, 10, 10, 0);
         na.setNode(1, 11, 20, 1);
-        na.setNode(2, 12, 12, 0.4);
+        na.setNode(2, 12, 12, 0.4, 0);
 
         EdgeIteratorState iter2 = graph.edge(0, 1).setDistance(100).set(carAccessEnc, true, true);
         final BaseGraph baseGraph = graph.getBaseGraph();

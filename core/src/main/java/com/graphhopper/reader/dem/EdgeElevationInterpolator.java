@@ -153,7 +153,7 @@ public class EdgeElevationInterpolator {
                     double lon = pointList.getLon(index);
                     double ele = elevationInterpolator.calculateElevationBasedOnTwoPoints(lat, lon,
                             lat0, lon0, ele0, lat1, lon1, ele1);
-                    pointList.set(index, lat, lon, ele);
+                    pointList.set(index, lat, lon, ele, 0);
                 }
                 if (count > 2)
                     edge.setWayGeometry(pointList.shallowCopy(1, count - 1, false));

@@ -28,6 +28,7 @@ import com.graphhopper.storage.Directory;
 import com.graphhopper.util.PointAccess;
 import com.graphhopper.util.PointList;
 import com.graphhopper.util.shapes.GHPoint3D;
+import com.graphhopper.util.shapes.GHPointIndoor;
 
 import java.util.Collections;
 import java.util.Map;
@@ -150,21 +151,21 @@ class OSMNodeData {
      *
      * @return the node type this OSM node was associated with before this method was called
      */
-    public long addCoordinatesIfMapped(long osmNodeId, double lat, double lon, DoubleSupplier getEle) {
+    public long addCoordinatesIfMapped(long osmNodeId, double lat, double lon, DoubleSupplier getEle, int level) {
         long nodeType = idsByOsmNodeIds.get(osmNodeId);
         if (nodeType == EMPTY_NODE)
             return nodeType;
         else if (nodeType == JUNCTION_NODE || nodeType == CONNECTION_NODE)
-            addTowerNode(osmNodeId, lat, lon, getEle.getAsDouble());
+            addTowerNode(osmNodeId, lat, lon, getEle.getAsDouble(), level);
         else if (nodeType == INTERMEDIATE_NODE || nodeType == END_NODE)
-            addPillarNode(osmNodeId, lat, lon, getEle.getAsDouble());
+            addPillarNode(osmNodeId, lat, lon, getEle.getAsDouble(), level);
         else
             throw new IllegalStateException("Unknown node type: " + nodeType + ", or coordinates already set. Possibly duplicate OSM node ID: " + osmNodeId);
         return nodeType;
     }
 
-    private long addTowerNode(long osmId, double lat, double lon, double ele) {
-        towerNodes.setNode(nextTowerId, lat, lon, ele);
+    private long addTowerNode(long osmId, double lat, double lon, double ele, int level) {
+        towerNodes.setNode(nextTowerId, lat, lon, Double.NaN, level);
         long id = towerNodeToId(nextTowerId);
         idsByOsmNodeIds.put(osmId, id);
         nextTowerId++;
@@ -173,12 +174,12 @@ class OSMNodeData {
         return id;
     }
 
-    private long addPillarNode(long osmId, double lat, double lon, double ele) {
+    private long addPillarNode(long osmId, double lat, double lon, double ele, int level) {
         long id = pillarNodeToId(nextPillarId);
         if (id > idsByOsmNodeIds.getMaxValue())
             throw new IllegalStateException("id for pillar node cannot be bigger than " + idsByOsmNodeIds.getMaxValue());
 
-        pillarNodes.setNode(nextPillarId, lat, lon, ele);
+        pillarNodes.setNode(nextPillarId, lat, lon, ele, level);
         idsByOsmNodeIds.put(osmId, id);
         nextPillarId++;
         return id;
@@ -190,13 +191,13 @@ class OSMNodeData {
      * @return the (artificial) OSM node ID created for the copied node and the associated ID
      */
     SegmentNode addCopyOfNode(SegmentNode node) {
-        GHPoint3D point = getCoordinates(node.id);
+        GHPointIndoor point = (GHPointIndoor) getCoordinates(node.id);
         if (point == null)
             throw new IllegalStateException("Cannot copy node : " + node.osmNodeId + ", because it is missing");
         final long newOsmId = nextArtificialOSMNodeId++;
         if (idsByOsmNodeIds.put(newOsmId, INTERMEDIATE_NODE) != EMPTY_NODE)
             throw new IllegalStateException("Artificial osm node id already exists: " + newOsmId);
-        long id = addPillarNode(newOsmId, point.getLat(), point.getLon(), point.getEle());
+        long id = addPillarNode(newOsmId, point.getLat(), point.getLon(), point.getEle(), point.getLevel());
         return new SegmentNode(newOsmId, id, node.tags);
     }
 
@@ -207,24 +208,21 @@ class OSMNodeData {
         double lat = pillarNodes.getLat(pillar);
         double lon = pillarNodes.getLon(pillar);
         double ele = pillarNodes.getEle(pillar);
+        int level = pillarNodes.getLevel(pillar);
         if (lat == Double.MAX_VALUE || lon == Double.MAX_VALUE)
             throw new IllegalStateException("Pillar node was already converted to tower node: " + id);
 
-        pillarNodes.setNode(pillar, Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
-        return addTowerNode(osmNodeId, lat, lon, ele);
+        pillarNodes.setNode(pillar, Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE, level);
+        return addTowerNode(osmNodeId, lat, lon, ele, level);
     }
 
     public GHPoint3D getCoordinates(long id) {
         if (isTowerNode(id)) {
             int tower = idToTowerNode(id);
-            return towerNodes.is3D()
-                    ? new GHPoint3D(towerNodes.getLat(tower), towerNodes.getLon(tower), towerNodes.getEle(tower))
-                    : new GHPoint3D(towerNodes.getLat(tower), towerNodes.getLon(tower), Double.NaN);
+            return new GHPointIndoor(towerNodes.getLat(tower), towerNodes.getLon(tower), towerNodes.getLevel(tower));
         } else if (isPillarNode(id)) {
             long pillar = idToPillarNode(id);
-            return pillarNodes.is3D()
-                    ? new GHPoint3D(pillarNodes.getLat(pillar), pillarNodes.getLon(pillar), pillarNodes.getEle(pillar))
-                    : new GHPoint3D(pillarNodes.getLat(pillar), pillarNodes.getLon(pillar), Double.NaN);
+            return new GHPointIndoor(pillarNodes.getLat(pillar), pillarNodes.getLon(pillar), pillarNodes.getLevel(pillar));
         } else
             return null;
     }

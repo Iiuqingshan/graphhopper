@@ -40,8 +40,8 @@ public class LocationIndexExample {
         // If you don't use the GraphHopper class you have to use the low level API:
         BaseGraph graph = new BaseGraph.Builder(4).create();
         graph.edge(0, 1).setKeyValues(Map.of("name", new KValue( "test edge")));
-        graph.getNodeAccess().setNode(0, 12, 42);
-        graph.getNodeAccess().setNode(1, 12.01, 42.01);
+        graph.getNodeAccess().setNode(0, 12, 42, 0);
+        graph.getNodeAccess().setNode(1, 12.01, 42.01, 0);
 
         LocationIndexTree index = new LocationIndexTree(graph.getBaseGraph(), graph.getDirectory());
         index.setResolution(300);

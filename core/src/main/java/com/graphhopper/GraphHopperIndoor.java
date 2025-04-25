@@ -10,7 +10,7 @@ import com.graphhopper.util.PMap;
 import java.util.List;
 import java.util.Map;
 
-public class IndoorGraphHopper extends GraphHopper {
+public class GraphHopperIndoor extends GraphHopper {
 
     @Override
     protected OSMParsers buildOSMParsers(Map<String, PMap> encodedValuesWithProps, Map<String, ImportUnit> activeImportUnits, Map<String, List<String>> restrictionVehicleTypesByProfile, List<String> ignoredHighways) {

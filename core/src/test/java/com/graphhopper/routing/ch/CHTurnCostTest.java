@@ -761,11 +761,11 @@ public class CHTurnCostTest {
         //  ||   /
         //   2---
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 49.407117, 9.701306);
-        na.setNode(1, 49.406914, 9.703393);
-        na.setNode(2, 49.404004, 9.709110);
-        na.setNode(3, 49.400160, 9.708787);
-        na.setNode(4, 49.400883, 9.706347);
+        na.setNode(0, 49.407117, 9.701306, 0);
+        na.setNode(1, 49.406914, 9.703393, 0);
+        na.setNode(2, 49.404004, 9.709110, 0);
+        na.setNode(3, 49.400160, 9.708787, 0);
+        na.setNode(4, 49.400883, 9.706347, 0);
         EdgeIteratorState edge0 = graph.edge(4, 3).setDistance(1940.063000).set(speedEnc, 10, 10);
         EdgeIteratorState edge1 = graph.edge(1, 2).setDistance(5250.106000).set(speedEnc, 10, 10);
         EdgeIteratorState edge2 = graph.edge(1, 2).setDistance(5250.106000).set(speedEnc, 10, 10);
@@ -816,12 +816,12 @@ public class CHTurnCostTest {
         // |
         // 2
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(1, 0.2, 0.0);
-        na.setNode(3, 0.1, 0.0);
-        na.setNode(2, 0.0, 0.0);
-        na.setNode(0, 0.1, 0.1);
-        na.setNode(5, 0.1, 0.2);
-        na.setNode(4, 0.1, 0.3);
+        na.setNode(1, 0.2, 0.0, 0);
+        na.setNode(3, 0.1, 0.0, 0);
+        na.setNode(2, 0.0, 0.0, 0);
+        na.setNode(0, 0.1, 0.1, 0);
+        na.setNode(5, 0.1, 0.2, 0);
+        na.setNode(4, 0.1, 0.3, 0);
         EdgeIteratorState edge0 = graph.edge(3, 1).setDistance(100).set(speedEnc, 10, 10);
         EdgeIteratorState edge1 = graph.edge(2, 3).setDistance(100).set(speedEnc, 10, 10);
         graph.edge(3, 0).setDistance(100).set(speedEnc, 10, 10);

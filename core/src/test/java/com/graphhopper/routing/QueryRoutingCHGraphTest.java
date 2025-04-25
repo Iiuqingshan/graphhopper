@@ -136,9 +136,9 @@ class QueryRoutingCHGraphTest {
         //  2 3
         // 0-x-1-2
         //   3
-        na.setNode(0, 50.00, 10.00);
-        na.setNode(1, 50.00, 10.10);
-        na.setNode(2, 50.00, 10.20);
+        na.setNode(0, 50.00, 10.00, 0);
+        na.setNode(1, 50.00, 10.10, 0);
+        na.setNode(2, 50.00, 10.20, 0);
         EdgeIteratorState edge = addEdge(graph, 0, 1);
         addEdge(graph, 1, 2);
         graph.freeze();
@@ -204,9 +204,9 @@ class QueryRoutingCHGraphTest {
         //  /---\
         // 0-x-1-2
         //   3
-        na.setNode(0, 50.00, 10.00);
-        na.setNode(1, 50.00, 10.10);
-        na.setNode(2, 50.00, 10.20);
+        na.setNode(0, 50.00, 10.00, 0);
+        na.setNode(1, 50.00, 10.10, 0);
+        na.setNode(2, 50.00, 10.20, 0);
         EdgeIteratorState edge = addEdge(graph, 0, 1);
         addEdge(graph, 1, 2);
         graph.freeze();
@@ -281,9 +281,9 @@ class QueryRoutingCHGraphTest {
         //  /---\
         // 0-x-1-2
         //   3
-        na.setNode(0, 50.00, 10.00);
-        na.setNode(1, 50.00, 10.10);
-        na.setNode(2, 50.00, 10.20);
+        na.setNode(0, 50.00, 10.00, 0);
+        na.setNode(1, 50.00, 10.10, 0);
+        na.setNode(2, 50.00, 10.20, 0);
         EdgeIteratorState edge = addEdge(graph, 0, 1);
         addEdge(graph, 1, 2);
         graph.freeze();
@@ -331,8 +331,8 @@ class QueryRoutingCHGraphTest {
     @Test
     public void getLevel() {
         // 0-x-1
-        na.setNode(0, 50.00, 10.00);
-        na.setNode(1, 50.00, 10.10);
+        na.setNode(0, 50.00, 10.00, 0);
+        na.setNode(1, 50.00, 10.10, 0);
         EdgeIteratorState edge = addEdge(graph, 0, 1);
         graph.freeze();
 
@@ -362,9 +362,9 @@ class QueryRoutingCHGraphTest {
         //  /---\
         // 0-x-1-2
         //   3
-        na.setNode(0, 50.00, 10.00);
-        na.setNode(1, 50.00, 10.10);
-        na.setNode(2, 50.00, 10.20);
+        na.setNode(0, 50.00, 10.00, 0);
+        na.setNode(1, 50.00, 10.10, 0);
+        na.setNode(2, 50.00, 10.20, 0);
         EdgeIteratorState edge = addEdge(graph, 0, 1)
                 // use different speeds for the two directions
                 .set(speedEnc, 30, 10);
@@ -464,9 +464,9 @@ class QueryRoutingCHGraphTest {
         //  /-----\
         // 0-x-1-x-2
         //   3   4
-        na.setNode(0, 50.00, 10.00);
-        na.setNode(1, 50.00, 10.10);
-        na.setNode(2, 50.00, 10.20);
+        na.setNode(0, 50.00, 10.00, 0);
+        na.setNode(1, 50.00, 10.10, 0);
+        na.setNode(2, 50.00, 10.20, 0);
         EdgeIteratorState edge1 = addEdge(graph, 0, 1);
         EdgeIteratorState edge2 = addEdge(graph, 1, 2);
         graph.getTurnCostStorage().set(turnCostEnc, 0, 1, 1, 5);

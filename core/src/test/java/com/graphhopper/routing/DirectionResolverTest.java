@@ -321,7 +321,7 @@ public class DirectionResolverTest {
     }
 
     private void addNode(int nodeId, double lat, double lon) {
-        na.setNode(nodeId, lat, lon);
+        na.setNode(nodeId, lat, lon, 0);
     }
 
     private EdgeIteratorState addEdge(int from, int to, boolean bothDirections) {

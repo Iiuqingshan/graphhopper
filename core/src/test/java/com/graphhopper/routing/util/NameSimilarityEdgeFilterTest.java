@@ -101,9 +101,9 @@ public class NameSimilarityEdgeFilterTest {
         int nodeId50 = 1;
         int nodeID200 = 2;
 
-        na.setNode(farAwayId, pointFarAway.lat, pointFarAway.lon);
-        na.setNode(nodeId50, point25mAway.lat, point25mAway.lon);
-        na.setNode(nodeID200, point200mAway.lat, point200mAway.lon);
+        na.setNode(farAwayId, pointFarAway.lat, pointFarAway.lon, 0);
+        na.setNode(nodeId50, point25mAway.lat, point25mAway.lon, 0);
+        na.setNode(nodeID200, point200mAway.lat, point200mAway.lon, 0);
 
         // Check that it matches a street 50m away
         EdgeIteratorState edge1 = g.edge(nodeId50, farAwayId).setKeyValues(Map.of(STREET_NAME, new KValue("Wentworth Street")));
@@ -274,16 +274,16 @@ public class NameSimilarityEdgeFilterTest {
         pointList.add(43.842807, -79.263802);
         pointList.add(43.842691, -79.264477);
         pointList.add(43.842711, -79.264588);
-        graph.getNodeAccess().setNode(0, 43.844521, -79.263976);
-        graph.getNodeAccess().setNode(1, 43.842775, -79.264649);
+        graph.getNodeAccess().setNode(0, 43.844521, -79.263976, 0);
+        graph.getNodeAccess().setNode(1, 43.842775, -79.264649, 0);
 
         EdgeIteratorState doubtfire = graph.edge(0, 1).setWayGeometry(pointList).set(accessEnc, true, true).
                 set(speedEnc, 60, 60).setKeyValues(Map.of(STREET_NAME, new KValue("Doubtfire Crescent")));
         EdgeIteratorState golden = graph.edge(0, 1).set(accessEnc, true, true).set(speedEnc, 60, 60).
                 setKeyValues(Map.of(STREET_NAME, new KValue("Golden Avenue")));
 
-        graph.getNodeAccess().setNode(2, 43.841501560244744, -79.26366394602502);
-        graph.getNodeAccess().setNode(3, 43.842247922172724, -79.2605663670726);
+        graph.getNodeAccess().setNode(2, 43.841501560244744, -79.26366394602502, 0);
+        graph.getNodeAccess().setNode(3, 43.842247922172724, -79.2605663670726, 0);
         PointList pointList2 = new PointList(1, false);
         pointList2.add(43.84191413615452, -79.261912128223);
         EdgeIteratorState denison = graph.edge(2, 3).setWayGeometry(pointList2).set(accessEnc, true, true).

@@ -53,8 +53,8 @@ public class LowLevelAPIExample {
             // Set node coordinates and build location index
             NodeAccess na = graph.getNodeAccess();
             graph.edge(0, 1).set(accessEnc, true).set(speedEnc, 10).setDistance(1530);
-            na.setNode(0, 15.15, 20.20);
-            na.setNode(1, 15.25, 20.21);
+            na.setNode(0, 15.15, 20.20, 0);
+            na.setNode(1, 15.25, 20.21, 0);
             LocationIndexTree index = new LocationIndexTree(graph, graph.getDirectory());
             index.prepareIndex();
 
@@ -110,8 +110,8 @@ public class LowLevelAPIExample {
         // Set node coordinates and build location index
         NodeAccess na = graph.getNodeAccess();
         graph.edge(0, 1).set(accessEnc, true).set(speedEnc, 10).setDistance(1020);
-        na.setNode(0, 15.15, 20.20);
-        na.setNode(1, 15.25, 20.21);
+        na.setNode(0, 15.15, 20.20, 0);
+        na.setNode(1, 15.25, 20.21, 0);
 
         // Prepare the graph for fast querying ...
         graph.freeze();

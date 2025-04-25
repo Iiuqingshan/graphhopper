@@ -50,15 +50,15 @@ class HeadingResolverTest {
         EncodingManager em = EncodingManager.start().add(accessEnc).add(speedEnc).build();
         BaseGraph graph = new BaseGraph.Builder(em).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 49.5073, 1.5545);
-        na.setNode(1, 49.5002, 2.3895);
-        na.setNode(2, 49.4931, 3.3013);
-        na.setNode(3, 48.8574, 3.2025);
-        na.setNode(4, 48.2575, 3.0651);
-        na.setNode(5, 48.2393, 2.2576);
-        na.setNode(6, 48.2246, 1.2249);
-        na.setNode(7, 48.8611, 1.2194);
-        na.setNode(8, 48.8538, 2.3950);
+        na.setNode(0, 49.5073, 1.5545, 0);
+        na.setNode(1, 49.5002, 2.3895, 0);
+        na.setNode(2, 49.4931, 3.3013, 0);
+        na.setNode(3, 48.8574, 3.2025, 0);
+        na.setNode(4, 48.2575, 3.0651, 0);
+        na.setNode(5, 48.2393, 2.2576, 0);
+        na.setNode(6, 48.2246, 1.2249, 0);
+        na.setNode(7, 48.8611, 1.2194, 0);
+        na.setNode(8, 48.8538, 2.3950, 0);
 
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, graph.edge(8, 0).setDistance(10)); // edge 0
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, graph.edge(8, 1).setDistance(10)); // edge 1
@@ -93,9 +93,9 @@ class HeadingResolverTest {
         EncodingManager em = EncodingManager.start().add(accessEnc).add(speedEnc).build();
         BaseGraph graph = new BaseGraph.Builder(em).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(1, 0.01, 0.00);
-        na.setNode(0, 0.00, 0.00);
-        na.setNode(2, -0.01, 0.00);
+        na.setNode(1, 0.01, 0.00, 0);
+        na.setNode(0, 0.00, 0.00, 0);
+        na.setNode(2, -0.01, 0.00, 0);
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, graph.edge(0, 1).setDistance(10)).
                 setWayGeometry(Helper.createPointList(0.00, 0.01, 0.01, 0.01));
         GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, graph.edge(0, 2).setDistance(10)).
@@ -117,8 +117,8 @@ class HeadingResolverTest {
         EncodingManager em = EncodingManager.start().add(accessEnc).add(speedEnc).build();
         BaseGraph graph = new BaseGraph.Builder(em).create();
         NodeAccess na = graph.getNodeAccess();
-        na.setNode(0, 48.8611, 1.2194);
-        na.setNode(1, 48.8538, 2.3950);
+        na.setNode(0, 48.8611, 1.2194, 0);
+        na.setNode(1, 48.8538, 2.3950, 0);
 
         EdgeIteratorState edge = GHUtility.setSpeed(60, true, true, accessEnc, speedEnc, graph.edge(0, 1).setDistance(10));
         Snap snap = createSnap(edge, 48.859, 2.00, 0);
